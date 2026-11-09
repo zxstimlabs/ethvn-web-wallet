@@ -2,11 +2,11 @@ import { useAtom } from "jotai";
 import { desktopTabAtom, type DesktopTab } from "@/atoms/desktopTabAtom";
 
 const TABS: { id: DesktopTab; label: string }[] = [
-  { id: "home", label: "Home" },
-  { id: "address-book", label: "Address Book" },
-  { id: "activity", label: "Activity" },
-  { id: "backup", label: "Backup" },
-  { id: "settings", label: "Settings" },
+  { id: "home", label: "Trang chủ" },
+  { id: "address-book", label: "Danh bạ" },
+  { id: "activity", label: "Hoạt động" },
+  { id: "backup", label: "Sao lưu" },
+  { id: "settings", label: "Cài đặt" },
 ];
 
 export default function DesktopNavbar() {

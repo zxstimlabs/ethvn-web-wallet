@@ -76,8 +76,8 @@ export default function ExportWallet() {
       <div className="flex flex-col gap-2">
         <h3 className="text-md text-muted-foreground">
           {activeWallet
-            ? `Download backup keystore for the current wallet`
-            : "Select a wallet to download the backup keystore"}
+            ? `Tải keystore sao lưu của ví hiện tại`
+            : "Chọn một ví để tải keystore sao lưu"}
         </h3>
         <Button
           onClick={downloadActiveKeystore}
@@ -85,24 +85,24 @@ export default function ExportWallet() {
           className="w-fit rounded-none hover:cursor-pointer"
           disabled={!activeWallet}
         >
-          Download
+          Tải xuống
         </Button>
         <div className="border-t-2 border-primary border-dotted" />
         <h3 className="text-md text-muted-foreground">
-          Download backup keystores for all wallets
+          Tải keystore sao lưu của tất cả các ví
         </h3>
         <Button
           onClick={downloadAllKeystores}
           size="sm"
           className="w-fit rounded-none hover:cursor-pointer"
         >
-          Download
+          Tải xuống
         </Button>
         <div className="border-t-2 border-primary border-dotted" />
         <h3 className="text-md text-muted-foreground">
           {activeWallet
-            ? "Export and reveal current wallet secret phrase"
-            : "Select a wallet to export and reveal the secret phrase"}
+            ? "Xuất và hiển thị cụm từ bí mật của ví hiện tại"
+            : "Chọn một ví để xuất và hiển thị cụm từ bí mật"}
         </h3>
         <form
           onSubmit={(e) => {
@@ -116,7 +116,7 @@ export default function ExportWallet() {
               name="password"
               validators={{
                 onChange: ({ value }) =>
-                  !value ? "Please enter a password" : undefined,
+                  !value ? "Vui lòng nhập mật khẩu" : undefined,
               }}
             >
               {(field) => (
@@ -128,7 +128,7 @@ export default function ExportWallet() {
                       value={field.state.value || ""}
                       onChange={(e) => field.handleChange(e.target.value)}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                       className="text-base"
                       required
                     />
@@ -166,7 +166,7 @@ export default function ExportWallet() {
                         <Loader2 className="w-4 h-4 animate-spin" />
                       </>
                     ) : (
-                      <>Export</>
+                      <>Xuất</>
                     )}
                   </Button>
                   <Button
@@ -180,7 +180,7 @@ export default function ExportWallet() {
                     }}
                     className="hover:cursor-pointer rounded-none border-secondary"
                   >
-                    Reset
+                    Đặt lại
                   </Button>
                 </div>
               )}
@@ -190,7 +190,7 @@ export default function ExportWallet() {
         <div className="flex flex-col gap-2">
           <Textarea
             value={exportedSecretPhrase || ""}
-            placeholder="Your exported secret phrase"
+            placeholder="Cụm từ bí mật đã xuất"
             className="rounded-none border-primary text-base"
             readOnly
             rows={10}
@@ -208,12 +208,12 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter your wallet password</em>
+        <em>Vui lòng nhập mật khẩu ví</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter your wallet password"
+            "Vui lòng nhập mật khẩu ví"
               ? ""
               : "text-red-400"
           }`}
@@ -221,9 +221,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

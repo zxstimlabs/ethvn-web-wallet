@@ -33,23 +33,17 @@ export default function ManageAddressBook() {
   return (
     <div className="flex flex-col border-2 border-primary gap-2 pb-8">
       <div className="flex flex-row justify-between items-center bg-primary text-secondary pl-1">
-        <h1 className="text-md font-bold">Address Book</h1>
+        <h1 className="text-md font-bold">Danh bạ</h1>
       </div>
 
       <div className="flex flex-col gap-4 px-4 py-2">
         <Tabs defaultValue="addresses" className="w-full">
           <TabsList className="border-primary border rounded-none">
             <TabsTrigger className="rounded-none" value="addresses">
-              Addresses
+              Địa chỉ
             </TabsTrigger>
             <TabsTrigger className="rounded-none" value="create">
-              Create
-            </TabsTrigger>
-            <TabsTrigger className="rounded-none" value="import">
-              Import
-            </TabsTrigger>
-            <TabsTrigger className="rounded-none" value="export">
-              Export
+              Tạo
             </TabsTrigger>
           </TabsList>
 
@@ -59,7 +53,7 @@ export default function ManageAddressBook() {
               <Search className="w-4 h-4 text-muted-foreground shrink-0" />
               <Input
                 className="rounded-none"
-                placeholder="Search by name, address, tag, or note..."
+                placeholder="Tìm theo tên, địa chỉ, thẻ hoặc ghi chú..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -68,9 +62,9 @@ export default function ManageAddressBook() {
               <div className="flex flex-col items-center gap-3 py-10 text-muted-foreground">
                 <BookUser className="w-10 h-10 opacity-30" />
                 {contacts.length === 0 ? (
-                  <p className="text-sm">No contacts yet. Add one in the Create tab.</p>
+                  <p className="text-sm">Chưa có liên hệ nào. Hãy thêm ở tab Tạo.</p>
                 ) : (
-                  <p className="text-sm">No contacts match your search.</p>
+                  <p className="text-sm">Không có liên hệ nào khớp với tìm kiếm.</p>
                 )}
               </div>
             ) : (
@@ -90,12 +84,6 @@ export default function ManageAddressBook() {
           <TabsContent value="create" className="flex flex-col gap-2">
             <AddContactForm />
           </TabsContent>
-
-          {/* ── Import tab ──────────────────────────────────────────────── */}
-          <TabsContent value="import" className="flex flex-col gap-2" />
-
-          {/* ── Export tab ──────────────────────────────────────────────── */}
-          <TabsContent value="export" className="flex flex-col gap-2" />
         </Tabs>
       </div>
     </div>

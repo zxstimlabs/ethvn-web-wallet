@@ -21,19 +21,19 @@ import { TransactionStatus } from "@/components/transaction-status";
 
 export function validateTransaction(value: string): WagmiPreparedTransaction | string {
   if (!value) {
-    return "Please enter the transaction JSON";
+    return "Vui lòng nhập JSON giao dịch";
   }
   try {
     const parsed = JSON.parse(value);
     if (!parsed.to || typeof parsed.to !== "string") {
-      return "Missing 'to' address";
+      return "Thiếu địa chỉ 'to'";
     }
     if (typeof parsed.chainId !== "number") {
-      return "Missing or invalid 'chainId' (must be a number)";
+      return "Thiếu hoặc sai 'chainId' (phải là số)";
     }
     return parsed as WagmiPreparedTransaction;
   } catch {
-    return "Invalid JSON format";
+    return "Định dạng JSON không hợp lệ";
   }
 }
 
@@ -144,7 +144,7 @@ export default function SendRawTransactionForm() {
             {(field) => (
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row gap-2 items-center justify-between">
-                  <p className="text-muted-foreground">Transaction JSON</p>
+                  <p className="text-muted-foreground">JSON giao dịch</p>
                 </div>
                 <div className="flex flex-row gap-2">
                   <Textarea
@@ -166,7 +166,7 @@ export default function SendRawTransactionForm() {
           <div className="border border-primary p-4">
             <div className="flex flex-col gap-3">
               <div className="border-b border-primary pb-2">
-                <p className="font-medium">Transaction Details</p>
+                <p className="font-medium">Chi tiết giao dịch</p>
               </div>
               <div className="flex flex-col gap-1 text-sm">
                 <div className="flex flex-row gap-2">
@@ -174,24 +174,24 @@ export default function SendRawTransactionForm() {
                   <span>{getChainName(parsedTransaction.chainId)}</span>
                 </div>
                 <div className="flex flex-row gap-2">
-                  <span className="text-muted-foreground">To:</span>
+                  <span className="text-muted-foreground">Đến:</span>
                   <span className="font-mono">{truncateAddress(parsedTransaction.to as Address)}</span>
                 </div>
                 {parsedTransaction.from && (
                   <div className="flex flex-row gap-2">
-                    <span className="text-muted-foreground">From:</span>
+                    <span className="text-muted-foreground">Từ:</span>
                     <span className="font-mono">{truncateAddress(parsedTransaction.from as Address)}</span>
                   </div>
                 )}
                 {parsedTransaction.value && parsedTransaction.value !== "0x0" && (
                   <div className="flex flex-row gap-2">
-                    <span className="text-muted-foreground">Value:</span>
+                    <span className="text-muted-foreground">Giá trị:</span>
                     <span className="font-mono">{parsedTransaction.value}</span>
                   </div>
                 )}
                 {parsedTransaction.type && (
                   <div className="flex flex-row gap-2">
-                    <span className="text-muted-foreground">Type:</span>
+                    <span className="text-muted-foreground">Loại:</span>
                     <span className="font-mono">{parsedTransaction.type}</span>
                   </div>
                 )}
@@ -209,13 +209,13 @@ export default function SendRawTransactionForm() {
                 )}
                 {parsedTransaction.maxFeePerGas && (
                   <div className="flex flex-row gap-2">
-                    <span className="text-muted-foreground">Max Fee Per Gas:</span>
+                    <span className="text-muted-foreground">Phí tối đa mỗi gas:</span>
                     <span className="font-mono">{parsedTransaction.maxFeePerGas}</span>
                   </div>
                 )}
                 {parsedTransaction.maxPriorityFeePerGas && (
                   <div className="flex flex-row gap-2">
-                    <span className="text-muted-foreground">Max Priority Fee:</span>
+                    <span className="text-muted-foreground">Phí ưu tiên tối đa:</span>
                     <span className="font-mono">{parsedTransaction.maxPriorityFeePerGas}</span>
                   </div>
                 )}
@@ -228,7 +228,7 @@ export default function SendRawTransactionForm() {
             name="password"
             validators={{
               onChange: ({ value }) =>
-                !value ? "Please enter your wallet password" : undefined,
+                !value ? "Vui lòng nhập mật khẩu ví" : undefined,
             }}
           >
             {(field) => (
@@ -240,7 +240,7 @@ export default function SendRawTransactionForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   className="rounded-none border-primary"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   required
                 />
                 <PasswordFieldInfo field={field} />
@@ -273,7 +273,7 @@ export default function SendRawTransactionForm() {
                   }
                   onClick={handleReset}
                 >
-                  Reset
+                  Đặt lại
                 </Button>
                 <Button
                   className="hover:cursor-pointer rounded-none col-span-2"
@@ -291,7 +291,7 @@ export default function SendRawTransactionForm() {
                   ) : isConfirmedRawTransaction ? (
                     <Check className="w-4 h-4" />
                   ) : (
-                    <>Send</>
+                    <>Gửi</>
                   )}
                 </Button>
               </div>
@@ -316,12 +316,12 @@ function RawTransactionDataFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter the transaction JSON</em>
+        <em>Vui lòng nhập JSON giao dịch</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter the transaction JSON"
+            "Vui lòng nhập JSON giao dịch"
               ? ""
               : "text-red-400"
           }`}
@@ -329,9 +329,9 @@ function RawTransactionDataFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -340,12 +340,12 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter your wallet password</em>
+        <em>Vui lòng nhập mật khẩu ví</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter your wallet password"
+            "Vui lòng nhập mật khẩu ví"
               ? ""
               : "text-red-400"
           }`}
@@ -353,9 +353,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

@@ -1,12 +1,12 @@
 export function validateUrl(url: string): string | null {
-  if (!url.trim()) return "RPC URL is required";
+  if (!url.trim()) return "Vui lòng nhập URL RPC";
   try {
     const parsed = new URL(url.trim());
     if (!["http:", "https:"].includes(parsed.protocol)) {
-      return "RPC URL must use http or https";
+      return "URL RPC phải dùng http hoặc https";
     }
   } catch {
-    return "Invalid URL";
+    return "URL không hợp lệ";
   }
   return null;
 }

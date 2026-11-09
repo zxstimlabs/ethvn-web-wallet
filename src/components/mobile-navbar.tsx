@@ -5,12 +5,9 @@ import SendTokens from "@/components/send-tokens";
 import Balances from "@/components/balances";
 import RpcSettings from "@/components/rpc-settings";
 import OfflineSettings from "@/components/offline-settings";
-import VpnSettings from "@/components/vpn-settings";
 import ManageAddressBook from "@/components/manage-address-book";
 import OutgoingActivity from "@/components/outgoing-activity";
-import IncomingActivity from "@/components/incoming-activity";
 import LocalDeviceBackup from "@/components/local-device-backup";
-import CloudSync from "@/components/cloud-sync";
 import { Wallet, BookUser, ArrowUpRight, TableProperties, Save, Settings } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -39,17 +36,11 @@ export default function MobileNavbar() {
         )}
         {activeTab === "address-book" && <ManageAddressBook />}
         {activeTab === "send" && <SendTokens />}
-        {activeTab === "activity" && (
-          <div className="grid grid-cols-1 gap-4">
-            <OutgoingActivity />
-            <IncomingActivity />
-          </div>
-        )}
+        {activeTab === "activity" && <OutgoingActivity />}
         {activeTab === "backup" && (
           <div className="grid grid-cols-1 gap-4">
             <KeystoreWallet />
             <LocalDeviceBackup />
-            <CloudSync />
           </div>
         )}
         {activeTab === "settings" && (
@@ -57,13 +48,8 @@ export default function MobileNavbar() {
             <div className="border-2 border-primary p-4">
               <RpcSettings />
             </div>
-            <div className="flex flex-col gap-4">
-              <div className="border-2 border-primary p-4">
-                <OfflineSettings />
-              </div>
-              <div className="border-2 border-primary p-4">
-                <VpnSettings />
-              </div>
+            <div className="border-2 border-primary p-4">
+              <OfflineSettings />
             </div>
           </div>
         )}

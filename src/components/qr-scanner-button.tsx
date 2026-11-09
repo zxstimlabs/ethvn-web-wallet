@@ -91,7 +91,7 @@ export default function QrScannerButton({
       <InputGroupButton
         type="button"
         onClick={() => setOpen(true)}
-        title="Scan QR code"
+        title="Quét mã QR"
         className="hover:cursor-pointer"
       >
         <QrCode className="w-3.5 h-3.5" />
@@ -100,7 +100,7 @@ export default function QrScannerButton({
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle>Scan QR Code</DialogTitle>
+            <DialogTitle>Quét mã QR</DialogTitle>
           </DialogHeader>
           <video
             ref={videoRef}

@@ -42,7 +42,7 @@ export default function AddCustomToken({
   function handleLookup() {
     setError(null);
     if (!isValid(input)) {
-      setError("Must be a valid 0x address (42 chars)");
+      setError("Phải là địa chỉ 0x hợp lệ (42 ký tự)");
       return;
     }
     setQueryAddress(input.trim() as `0x${string}`);
@@ -62,7 +62,7 @@ export default function AddCustomToken({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row items-center justify-between">
-        <p className="text-xs font-semibold">Add custom token</p>
+        <p className="text-xs font-semibold">Thêm token tùy chỉnh</p>
         <button
           type="button"
           onClick={onCancel}
@@ -76,7 +76,7 @@ export default function AddCustomToken({
       <div className="flex flex-row gap-2">
         <Input
           className="rounded-none h-7 text-xs flex-1"
-          placeholder="Token address (0x...)"
+          placeholder="Địa chỉ token (0x...)"
           value={input}
           onChange={(e) => {
             setInput(e.target.value);
@@ -92,7 +92,7 @@ export default function AddCustomToken({
           onClick={handleLookup}
           disabled={busy}
         >
-          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : "Look up"}
+          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : "Tra cứu"}
         </Button>
       </div>
 
@@ -102,21 +102,21 @@ export default function AddCustomToken({
           <div className="flex flex-row gap-2 items-center">
             <span className="font-medium">{fetchedName}</span>
             <span className="text-muted-foreground">{fetchedSymbol}</span>
-            <span className="text-muted-foreground">{fetchedDecimals} decimals</span>
+            <span className="text-muted-foreground">{fetchedDecimals} số thập phân</span>
           </div>
           <Button
             type="button"
             className="rounded-none h-6 text-xs px-2 hover:cursor-pointer"
             onClick={handleAdd}
           >
-            Add
+            Thêm
           </Button>
         </div>
       )}
 
       {fetchFailed && (
         <p className="text-xs text-red-400">
-          Could not fetch token metadata. Check the address and try again.
+          Không thể lấy metadata của token. Hãy kiểm tra địa chỉ và thử lại.
         </p>
       )}
       {error && <p className="text-xs text-red-400">{error}</p>}

@@ -7,12 +7,9 @@ import BackupWallet from "@/components/keystore-wallet";
 import MobileNavbar from "@/components/mobile-navbar";
 import RpcSettings from "@/components/rpc-settings";
 import OfflineSettings from "@/components/offline-settings";
-import VpnSettings from "@/components/vpn-settings";
 import ManageAddressBook from "@/components/manage-address-book";
 import OutgoingActivity from "@/components/outgoing-activity";
-import IncomingActivity from "@/components/incoming-activity";
 import LocalDeviceBackup from "@/components/local-device-backup";
-import CloudSync from "@/components/cloud-sync";
 
 export default function App() {
   const desktopTab = useAtomValue(desktopTabAtom);
@@ -38,16 +35,14 @@ export default function App() {
           </div>
         )}
         {desktopTab === "activity" && (
-          <div className="grid lg:grid-cols-2 gap-4 w-full">
+          <div className="w-[760px] mx-auto">
             <OutgoingActivity />
-            <IncomingActivity />
           </div>
         )}
         {desktopTab === "backup" && (
-          <div className="grid lg:grid-cols-3 gap-4 w-full">
+          <div className="grid lg:grid-cols-2 gap-4 w-full">
             <BackupWallet />
             <LocalDeviceBackup />
-            <CloudSync />
           </div>
         )}
         {desktopTab === "settings" && (
@@ -55,13 +50,8 @@ export default function App() {
             <div className="border-2 border-primary p-4">
               <RpcSettings />
             </div>
-            <div className="flex flex-col gap-4">
-              <div className="border-2 border-primary p-4">
-                <OfflineSettings />
-              </div>
-              <div className="border-2 border-primary p-4">
-                <VpnSettings />
-              </div>
+            <div className="border-2 border-primary p-4">
+              <OfflineSettings />
             </div>
           </div>
         )}

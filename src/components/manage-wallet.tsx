@@ -49,7 +49,7 @@ export default function ManageWallet() {
   return (
     <div className="flex flex-col border-2 border-primary gap-2 pb-6">
       <div className="flex flex-row justify-between items-center bg-primary text-secondary pl-1">
-        <h1 className="text-md font-bold">Wallets</h1>
+        <h1 className="text-md font-bold">Ví</h1>
       </div>
       {wallets && wallets.length > 0 ? (
         <div className="flex flex-col gap-4 px-4 py-2">
@@ -59,13 +59,13 @@ export default function ManageWallet() {
                 {activeWallet ? (
                   <p>{activeWallet.name}</p>
                 ) : (
-                  <p className="text-muted-foreground">No wallet selected</p>
+                  <p className="text-muted-foreground">Chưa chọn ví</p>
                 )}
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value={null}>
-                    <p className="text-muted-foreground">No wallet selected</p>
+                    <p className="text-muted-foreground">Chưa chọn ví</p>
                   </SelectItem>
                   <SelectSeparator />
                   {walletItems.map((wallet) => (
@@ -102,7 +102,7 @@ export default function ManageWallet() {
             </DialogTrigger>
             <DialogContent className="w-[calc(100%-2rem)] sm:max-w-[420px]">
               <DialogHeader>
-                <DialogTitle>QR Code</DialogTitle>
+                <DialogTitle>Mã QR</DialogTitle>
               </DialogHeader>
               <div className="flex flex-col items-center gap-4">
                 <div className="w-full aspect-square bg-white p-3">
@@ -121,22 +121,22 @@ export default function ManageWallet() {
           <Accordion className="border-t-2 border-primary">
             <AccordionItem value="manage-wallets" className="border-none">
               <AccordionTrigger className="pt-2 hover:no-underline font-medium">
-                Manage
+                Quản lý
               </AccordionTrigger>
               <AccordionContent>
                 <Tabs defaultValue="create" className="w-full">
                   <TabsList className="border-primary border rounded-none">
                     <TabsTrigger className="rounded-none" value="create">
-                      Create
+                      Tạo
                     </TabsTrigger>
                     <TabsTrigger className="rounded-none" value="export">
-                      Export
+                      Xuất
                     </TabsTrigger>
                     <TabsTrigger className="rounded-none" value="import">
-                      Import
+                      Nhập
                     </TabsTrigger>
                     <TabsTrigger className="rounded-none" value="delete">
-                      Delete
+                      Xóa
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="create" className="flex flex-col gap-2">
@@ -159,15 +159,15 @@ export default function ManageWallet() {
       ) : (
         <div className="flex flex-col gap-4 px-4 py-2">
           <p className="text-sm">
-            No wallets found. Create a new wallet or import an existing wallet to get started.
+            Chưa có ví nào. Hãy tạo ví mới hoặc nhập ví có sẵn để bắt đầu.
           </p>
           <Tabs defaultValue="create" className="w-full">
             <TabsList className="border-primary border rounded-none">
               <TabsTrigger className="rounded-none" value="create">
-                Create
+                Tạo
               </TabsTrigger>
               <TabsTrigger className="rounded-none" value="import">
-                Import
+                Nhập
               </TabsTrigger>
             </TabsList>
             <TabsContent value="create" className="flex flex-col gap-2">

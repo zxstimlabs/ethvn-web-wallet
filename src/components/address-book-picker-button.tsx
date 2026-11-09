@@ -38,7 +38,7 @@ export default function AddressBookPickerButton({
       <InputGroupButton
         type="button"
         onClick={() => setOpen(true)}
-        title="Pick from address book"
+        title="Chọn từ danh bạ"
         className="hover:cursor-pointer"
       >
         <BookUser className="w-3.5 h-3.5" />
@@ -47,13 +47,13 @@ export default function AddressBookPickerButton({
       <Dialog open={open} onOpenChange={(next) => { setOpen(next); if (!next) setSearch(""); }}>
         <DialogContent className="w-full max-w-sm md:max-w-3xl">
           <DialogHeader>
-            <DialogTitle>Address Book</DialogTitle>
+            <DialogTitle>Danh bạ</DialogTitle>
           </DialogHeader>
           <div className="flex flex-row gap-2 items-center">
             <Search className="w-4 h-4 text-muted-foreground shrink-0" />
             <input
               className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted-foreground"
-              placeholder="Search name or address..."
+              placeholder="Tìm theo tên hoặc địa chỉ..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               autoFocus
@@ -63,7 +63,7 @@ export default function AddressBookPickerButton({
           <div className="flex flex-col gap-1 max-h-64 overflow-y-auto">
             {filteredWallets.length > 0 && (
               <>
-                <p className="text-xs font-semibold text-muted-foreground px-2 pt-1">My addresses</p>
+                <p className="text-xs font-semibold text-muted-foreground px-2 pt-1">Địa chỉ của tôi</p>
                 {filteredWallets.map((w) => {
                   const isCurrent = activeWallet?.address === w.address;
                   return (
@@ -75,7 +75,7 @@ export default function AddressBookPickerButton({
                     >
                       <div className="flex flex-row items-center gap-2">
                         <span className="font-medium text-xs">{w.name}</span>
-                        {isCurrent && <Badge variant="outline" className="text-[10px] px-1 py-0 leading-4">current</Badge>}
+                        {isCurrent && <Badge variant="outline" className="text-[10px] px-1 py-0 leading-4">hiện tại</Badge>}
                       </div>
                       <span className="text-xs text-muted-foreground font-mono">{w.address}</span>
                     </button>
@@ -85,7 +85,7 @@ export default function AddressBookPickerButton({
             )}
             {filtered.length > 0 && (
               <>
-                <p className="text-xs font-semibold text-muted-foreground px-2 pt-1">Contacts</p>
+                <p className="text-xs font-semibold text-muted-foreground px-2 pt-1">Liên hệ</p>
                 {filtered.map((c) => (
                   <button
                     key={c.id}
@@ -101,7 +101,7 @@ export default function AddressBookPickerButton({
             )}
             {filteredWallets.length === 0 && filtered.length === 0 && (
               <p className="text-xs text-muted-foreground text-center py-4">
-                {wallets.length === 0 && contacts.length === 0 ? "No addresses saved yet." : "No results match."}
+                {wallets.length === 0 && contacts.length === 0 ? "Chưa lưu địa chỉ nào." : "Không có kết quả phù hợp."}
               </p>
             )}
           </div>

@@ -43,12 +43,11 @@ export default function MigrationWalletStorage() {
       <div className="flex flex-row gap-2 items-center text-yellow-600 dark:text-yellow-400">
         <TriangleAlert className="w-4 h-4 shrink-0" />
         <p className="text-xs font-medium">
-          {staleCount} wallet{staleCount > 1 ? "s are" : " is"} on an older storage
-          format (missing <code>umVersion</code>).
+          {staleCount} ví đang dùng định dạng lưu trữ cũ (thiếu <code>umVersion</code>).
         </p>
       </div>
       <p className="text-xs text-muted-foreground">
-        Click below to migrate to the current format ({CURRENT_UM_VERSION}). No keys are changed — only metadata is updated.
+        Nhấn bên dưới để chuyển sang định dạng hiện tại ({CURRENT_UM_VERSION}). Khóa không bị thay đổi — chỉ cập nhật metadata.
       </p>
       <Button
         type="button"
@@ -56,7 +55,7 @@ export default function MigrationWalletStorage() {
         variant="outline"
         onClick={handleMigrate}
       >
-        Migrate {staleCount} wallet{staleCount > 1 ? "s" : ""}
+        Chuyển đổi {staleCount} ví
       </Button>
     </div>
   );

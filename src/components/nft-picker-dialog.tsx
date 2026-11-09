@@ -62,7 +62,7 @@ export function NftPickerDialog({
     queryKey: ["nft-list"],
     queryFn: async () => {
       const res = await fetch("/nft-list.json");
-      if (!res.ok) throw new Error("Failed to fetch NFT list");
+      if (!res.ok) throw new Error("Không thể tải danh sách NFT");
       return res.json() as Promise<{ collections: NftCollection[] }>;
     },
     staleTime: Infinity,
@@ -168,7 +168,7 @@ export function NftPickerDialog({
                 ? `${selectedNft.collection.symbol} #${selectedNft.tokenId}`
                 : selectedCollection
                   ? selectedCollection.symbol
-                  : "Select"}
+                  : "Chọn"}
             </span>
             <ChevronDown className="w-3 h-3 text-muted-foreground" />
           </>
@@ -176,19 +176,19 @@ export function NftPickerDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Select NFT</DialogTitle>
+          <DialogTitle>Chọn NFT</DialogTitle>
         </DialogHeader>
         <input
           autoFocus
           type="text"
-          placeholder="Search by name, symbol or token ID..."
+          placeholder="Tìm theo tên, ký hiệu hoặc token ID..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full border border-input bg-transparent px-2.5 py-2 text-xs outline-none placeholder:text-muted-foreground"
         />
         <div className="flex flex-col max-h-64 overflow-y-auto">
           {filteredOwned.length === 0 && filteredUnowned.length === 0 ? (
-            <p className="px-2.5 py-2 text-xs text-muted-foreground">No results</p>
+            <p className="px-2.5 py-2 text-xs text-muted-foreground">Không có kết quả</p>
           ) : (
             <>
               {/* Owned — fills contract + tokenId */}

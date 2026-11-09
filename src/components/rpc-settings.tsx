@@ -59,17 +59,17 @@ export default function RpcSettings() {
 
       {/* ── Active RPC ──────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold">RPC Endpoint</h2>
+        <h2 className="text-sm font-semibold">Điểm cuối RPC</h2>
 
         <div className="flex flex-col gap-1">
-          <p className="text-xs text-muted-foreground">Active</p>
+          <p className="text-xs text-muted-foreground">Đang dùng</p>
           <div className="flex flex-row items-center gap-2">
             <span className={`text-xs px-1.5 py-0.5 border ${
               isUsingCustomRpc
                 ? "border-primary text-primary"
                 : "border-muted-foreground text-muted-foreground"
             }`}>
-              {isUsingCustomRpc ? settings.activeRpc?.name ?? "custom" : "default"}
+              {isUsingCustomRpc ? settings.activeRpc?.name ?? "tùy chỉnh" : "mặc định"}
             </span>
             <code className="text-xs font-mono text-muted-foreground break-all">
               {activeUrl || "—"}
@@ -84,7 +84,7 @@ export default function RpcSettings() {
             className="rounded-none hover:cursor-pointer w-fit"
             onClick={handleResetToDefault}
           >
-            Reset to default
+            Đặt lại mặc định
           </Button>
         )}
       </div>
@@ -93,10 +93,10 @@ export default function RpcSettings() {
 
       {/* ── RPC List ────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold">Saved RPCs</h2>
+        <h2 className="text-sm font-semibold">RPC đã lưu</h2>
 
         {settings.rpcList.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No custom RPCs saved yet.</p>
+          <p className="text-xs text-muted-foreground">Chưa lưu RPC tùy chỉnh nào.</p>
         ) : (
           <div className="flex flex-col gap-2">
             {settings.rpcList.map((entry) => {
@@ -123,7 +123,7 @@ export default function RpcSettings() {
                       size="icon"
                       className="rounded-none hover:cursor-pointer w-7 h-7"
                       onClick={() => handleSelect(entry)}
-                      title={isActive ? "Currently active" : "Set as active"}
+                      title={isActive ? "Đang dùng" : "Đặt làm RPC đang dùng"}
                       disabled={isActive}
                     >
                       <Check className="w-3.5 h-3.5" />
@@ -134,7 +134,7 @@ export default function RpcSettings() {
                       size="icon"
                       className="rounded-none hover:cursor-pointer hover:text-destructive w-7 h-7"
                       onClick={() => handleDelete(entry.id)}
-                      title="Delete"
+                      title="Xóa"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </Button>
@@ -150,10 +150,10 @@ export default function RpcSettings() {
 
       {/* ── Add RPC ─────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold">Add RPC</h2>
+        <h2 className="text-sm font-semibold">Thêm RPC</h2>
         <Input
           className="rounded-none text-base"
-          placeholder="Name (optional, e.g. Alchemy)"
+          placeholder="Tên (không bắt buộc, vd: Alchemy)"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
@@ -171,7 +171,7 @@ export default function RpcSettings() {
           onClick={handleAdd}
         >
           <Save className="w-3.5 h-3.5" />
-          Save
+          Lưu
         </Button>
       </div>
 

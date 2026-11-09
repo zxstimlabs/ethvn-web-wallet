@@ -19,13 +19,13 @@ function formatValue(record: ActivityRecord): string | null {
     return `${formatUnits(BigInt(record.tokenValue), decimals)} ${symbol}`.trim();
   }
   if (record.type === "erc721" && record.nftId) {
-    return `Token ID: ${record.nftId}`;
+    return `ID token: ${record.nftId}`;
   }
   return null;
 }
 
 function formatTimestamp(ts: number): string {
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat("vi-VN", {
     dateStyle: "short",
     timeStyle: "medium",
   }).format(new Date(ts));
@@ -57,16 +57,16 @@ export default function OutgoingActivity() {
   return (
     <div className="flex flex-col border-2 border-primary gap-2 pb-8">
       <div className="flex flex-row justify-between items-center bg-primary text-secondary pl-1">
-        <h1 className="text-md font-bold">Outgoing</h1>
+        <h1 className="text-md font-bold">Giao dịch đã gửi</h1>
       </div>
 
       <div className="flex flex-col px-4">
         {!activeWallet ? (
-          <p className="text-sm text-muted-foreground py-4">No active wallet selected.</p>
+          <p className="text-sm text-muted-foreground py-4">Chưa chọn ví nào.</p>
         ) : !records ? (
-          <p className="text-sm text-muted-foreground py-4">Loading...</p>
+          <p className="text-sm text-muted-foreground py-4">Đang tải...</p>
         ) : records.length === 0 ? (
-          <p className="text-sm text-muted-foreground py-4">No activity yet.</p>
+          <p className="text-sm text-muted-foreground py-4">Chưa có hoạt động nào.</p>
         ) : (
           <div className="flex flex-col divide-y divide-border">
             {records.map((record) => (
@@ -123,7 +123,7 @@ function OutgoingActivityRow({
       {/* body rows */}
       <div className="flex flex-col gap-0.5 text-xs">
         <div className="flex flex-row gap-2">
-          <span className="text-muted-foreground w-6 shrink-0">To</span>
+          <span className="text-muted-foreground w-8 shrink-0">Đến</span>
           <span className="font-mono break-all">
             {record.ensName ? (
               <>
@@ -138,7 +138,7 @@ function OutgoingActivityRow({
 
         {value && (
           <div className="flex flex-row gap-2 items-center">
-            <span className="text-muted-foreground shrink-0">Amount</span>
+            <span className="text-muted-foreground shrink-0">Số lượng</span>
             <span className="font-mono">{value}</span>
           </div>
         )}

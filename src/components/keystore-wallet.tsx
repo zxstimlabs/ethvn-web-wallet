@@ -113,14 +113,14 @@ export default function KeystoreWallet() {
         <Tabs defaultValue="encrypt" className="w-full">
           <TabsList className="border-primary border rounded-none">
             <TabsTrigger className="rounded-none" value="encrypt">
-              Encrypt
+              Mã hóa
             </TabsTrigger>
             <TabsTrigger className="rounded-none" value="decrypt">
-              Decrypt
+              Giải mã
             </TabsTrigger>
           </TabsList>
           <TabsContent value="encrypt" className="flex flex-col gap-2">
-            <p className="text-muted-foreground text-xs">Convert any mnemonic phrase to a keystore</p>
+            <p className="text-muted-foreground text-xs">Chuyển bất kỳ cụm từ khôi phục nào thành keystore</p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -133,7 +133,7 @@ export default function KeystoreWallet() {
                   name="name"
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? "Please enter a name" : undefined,
+                      !value ? "Vui lòng nhập tên" : undefined,
                   }}
                 >
                   {(field) => (
@@ -144,7 +144,7 @@ export default function KeystoreWallet() {
                         value={field.state.value || ""}
                         onChange={(e) => field.handleChange(e.target.value)}
                         type="text"
-                        placeholder="Wallet name"
+                        placeholder="Tên ví"
                         className="rounded-none border-primary text-base"
                         required
                       />
@@ -156,7 +156,7 @@ export default function KeystoreWallet() {
                   name="password"
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? "Please enter a password" : undefined,
+                      !value ? "Vui lòng nhập mật khẩu" : undefined,
                   }}
                 >
                   {(field) => (
@@ -167,7 +167,7 @@ export default function KeystoreWallet() {
                         value={field.state.value || ""}
                         onChange={(e) => field.handleChange(e.target.value)}
                         type="password"
-                        placeholder="Strong password"
+                        placeholder="Mật khẩu mạnh"
                         className="rounded-none border-primary text-base"
                         required
                       />
@@ -179,7 +179,7 @@ export default function KeystoreWallet() {
                   name="mnemonicPhrase"
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? "Please enter a mnemonic phrase" : undefined,
+                      !value ? "Vui lòng nhập cụm từ khôi phục" : undefined,
                   }}
                 >
                   {(field) => (
@@ -190,7 +190,7 @@ export default function KeystoreWallet() {
                         value={field.state.value || ""}
                         onChange={(e) => field.handleChange(e.target.value)}
                         type="text"
-                        placeholder="Mnemonic phrase"
+                        placeholder="Cụm từ khôi phục"
                         className="rounded-none border-primary text-base"
                         required
                       />
@@ -213,7 +213,7 @@ export default function KeystoreWallet() {
                             <Loader2 className="w-4 h-4 animate-spin" />
                           </>
                         ) : (
-                          <>Backup</>
+                          <>Sao lưu</>
                         )}
                       </Button>
                       <Button
@@ -226,7 +226,7 @@ export default function KeystoreWallet() {
                         }}
                         className="hover:cursor-pointer rounded-none border-secondary"
                       >
-                        Reset
+                        Đặt lại
                       </Button>
                     </div>
                   )}
@@ -237,8 +237,7 @@ export default function KeystoreWallet() {
               {outputBackupKeystore ? (
                 <div className="flex flex-col gap-2">
                   <p>
-                    Copy and save the following backup keystore to a secure
-                    location.
+                    Sao chép và lưu keystore sao lưu dưới đây ở nơi an toàn.
                   </p>
                   <div className="flex flex-row gap-2">
                     <CopyButton
@@ -251,7 +250,7 @@ export default function KeystoreWallet() {
                       onClick={downloadBackupKeystore}
                       className="hover:cursor-pointer rounded-none border-secondary"
                     >
-                      Download
+                      Tải xuống
                     </Button>
                     <Button
                       size="sm"
@@ -259,7 +258,7 @@ export default function KeystoreWallet() {
                       onClick={clearBackupKeystore}
                       className="hover:cursor-pointer rounded-none border-secondary"
                     >
-                      Reset
+                      Đặt lại
                     </Button>
                   </div>
                   <Textarea
@@ -270,12 +269,12 @@ export default function KeystoreWallet() {
                   />
                 </div>
               ) : (
-                <p>No backup keystore</p>
+                <p>Chưa có keystore sao lưu</p>
               )}
             </div>
           </TabsContent>
           <TabsContent value="decrypt" className="flex flex-col gap-2">
-            <p className="text-muted-foreground text-xs">Decrypt any keystore to a mnemonic phrase</p>
+            <p className="text-muted-foreground text-xs">Giải mã bất kỳ keystore nào thành cụm từ khôi phục</p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -288,7 +287,7 @@ export default function KeystoreWallet() {
                   name="keystore"
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? "Please enter a mnemonic phrase" : undefined,
+                      !value ? "Vui lòng nhập cụm từ khôi phục" : undefined,
                   }}
                 >
                   {(field) => (
@@ -310,7 +309,7 @@ export default function KeystoreWallet() {
                   name="password"
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? "Please enter a password" : undefined,
+                      !value ? "Vui lòng nhập mật khẩu" : undefined,
                   }}
                 >
                   {(field) => (
@@ -321,7 +320,7 @@ export default function KeystoreWallet() {
                         value={field.state.value || ""}
                         onChange={(e) => field.handleChange(e.target.value)}
                         type="password"
-                        placeholder="Password"
+                        placeholder="Mật khẩu"
                         className="rounded-none border-primary"
                         required
                       />
@@ -344,7 +343,7 @@ export default function KeystoreWallet() {
                             <Loader2 className="w-4 h-4 animate-spin" />
                           </>
                         ) : (
-                          <>Decrypt</>
+                          <>Giải mã</>
                         )}
                       </Button>
                       <Button
@@ -357,7 +356,7 @@ export default function KeystoreWallet() {
                         }}
                         className="hover:cursor-pointer rounded-none border-secondary"
                       >
-                        Reset
+                        Đặt lại
                       </Button>
                     </div>
                   )}
@@ -368,8 +367,7 @@ export default function KeystoreWallet() {
               {outputDecryptedMnemonicPhrase ? (
                 <div className="flex flex-col gap-2">
                   <p>
-                    Copy and save the following backup keystore to a secure
-                    location.
+                    Sao chép và lưu cụm từ khôi phục dưới đây ở nơi an toàn.
                   </p>
                   <div className="flex flex-row gap-2">
                     <CopyButton
@@ -382,7 +380,7 @@ export default function KeystoreWallet() {
                       onClick={clearDecryptedMnemonicPhrase}
                       className="hover:cursor-pointer rounded-none border-secondary"
                     >
-                      Reset
+                      Đặt lại
                     </Button>
                   </div>
                   <Textarea
@@ -393,7 +391,7 @@ export default function KeystoreWallet() {
                   />
                 </div>
               ) : (
-                <p>No backup keystore</p>
+                <p>Chưa có cụm từ khôi phục đã giải mã</p>
               )}
             </div>
           </TabsContent>
@@ -407,11 +405,11 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a name</em>
+        <em>Vui lòng nhập tên</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a name"
+            field.state.meta.errors.join(",") === "Vui lòng nhập tên"
               ? ""
               : "text-red-400"
           }`}
@@ -419,9 +417,9 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -430,11 +428,11 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a password</em>
+        <em>Vui lòng nhập mật khẩu</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a password"
+            field.state.meta.errors.join(",") === "Vui lòng nhập mật khẩu"
               ? ""
               : "text-red-400"
           }`}
@@ -442,9 +440,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -453,12 +451,12 @@ function MnemonicPhraseFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a mnemonic phrase</em>
+        <em>Vui lòng nhập cụm từ khôi phục</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter a mnemonic phrase"
+            "Vui lòng nhập cụm từ khôi phục"
               ? ""
               : "text-red-400"
           }`}
@@ -466,9 +464,9 @@ function MnemonicPhraseFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -478,11 +476,11 @@ function KeystoreFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a keystore</em>
+        <em>Vui lòng nhập keystore</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a keystore"
+            field.state.meta.errors.join(",") === "Vui lòng nhập keystore"
               ? ""
               : "text-red-400"
           }`}
@@ -490,9 +488,9 @@ function KeystoreFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

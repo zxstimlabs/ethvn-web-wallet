@@ -89,7 +89,7 @@ export default function AddContactForm() {
           name="name"
           validators={{
             onChange: ({ value }) =>
-              !value.trim() ? "Please enter a name" : undefined,
+              !value.trim() ? "Vui lòng nhập tên" : undefined,
           }}
         >
           {(field) => (
@@ -100,10 +100,10 @@ export default function AddContactForm() {
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
                 className="rounded-none border-primary"
-                placeholder="Name"
+                placeholder="Tên"
                 required
               />
-              <FieldInfo field={field} placeholder="Please enter a name" />
+              <FieldInfo field={field} placeholder="Vui lòng nhập tên" />
             </div>
           )}
         </form.Field>
@@ -113,9 +113,9 @@ export default function AddContactForm() {
           name="address"
           validators={{
             onChange: ({ value }) => {
-              if (!value.trim()) return "Please enter an address";
+              if (!value.trim()) return "Vui lòng nhập địa chỉ";
               if (existingAddresses.includes(value.trim().toLowerCase()))
-                return "Address already in address book";
+                return "Địa chỉ đã có trong danh bạ";
               return undefined;
             },
           }}
@@ -128,7 +128,7 @@ export default function AddContactForm() {
                     name={field.name}
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="Address (0x...) or ENS (.eth)"
+                    placeholder="Địa chỉ (0x...) hoặc ENS (.eth)"
                     className="text-base"
                     required
                   />
@@ -136,7 +136,7 @@ export default function AddContactForm() {
                     <InputGroupButton
                       type="button"
                       onClick={() => refetchEnsAddress()}
-                      title="Look up ENS"
+                      title="Tra cứu ENS"
                       className="hover:cursor-pointer"
                     >
                       {isLoadingEnsAddress ? (
@@ -164,7 +164,7 @@ export default function AddContactForm() {
           validators={{
             onChange: ({ value }) => {
               if (value.trim() && isNaN(Number(value.trim())))
-                return "Chain must be a numeric chain ID";
+                return "Chain phải là chain ID dạng số";
               return undefined;
             },
           }}
@@ -177,10 +177,10 @@ export default function AddContactForm() {
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
                 className="rounded-none"
-                placeholder="Chain ID (optional, e.g. 1)"
+                placeholder="Chain ID (không bắt buộc, vd: 1)"
                 type="number"
               />
-              <FieldInfo field={field} placeholder="Optional — leave blank for chain-agnostic" />
+              <FieldInfo field={field} placeholder="Không bắt buộc — để trống nếu dùng cho mọi chain" />
             </div>
           )}
         </form.Field>
@@ -194,7 +194,7 @@ export default function AddContactForm() {
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               className="rounded-none"
-              placeholder="Tags (comma-separated, e.g. defi, team)"
+              placeholder="Thẻ (phân tách bằng dấu phẩy, vd: defi, team)"
             />
           )}
         </form.Field>
@@ -208,7 +208,7 @@ export default function AddContactForm() {
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               className="rounded-none"
-              placeholder="Note (optional)"
+              placeholder="Ghi chú (không bắt buộc)"
             />
           )}
         </form.Field>
@@ -228,7 +228,7 @@ export default function AddContactForm() {
                 ) : isAdded ? (
                   <Check className="w-4 h-4" />
                 ) : (
-                  <>Add</>
+                  <>Thêm</>
                 )}
               </Button>
               <Button
@@ -240,7 +240,7 @@ export default function AddContactForm() {
                   form.reset();
                 }}
               >
-                Reset
+                Đặt lại
               </Button>
             </div>
           )}
@@ -266,11 +266,11 @@ function AddressFieldInfo({
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter an address or ENS</em>
+        <em>Vui lòng nhập địa chỉ hoặc ENS</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={
-            field.state.meta.errors.join(",") === "Please enter an address"
+            field.state.meta.errors.join(",") === "Vui lòng nhập địa chỉ"
               ? ""
               : "text-red-400"
           }
@@ -280,15 +280,15 @@ function AddressFieldInfo({
       ) : isLoadingEnsAddress ? (
         <Skeleton className="w-10 h-4" />
       ) : isErrorEnsAddress ? (
-        <div className="text-red-400 text-xs">Failed to resolve ENS</div>
+        <div className="text-red-400 text-xs">Không thể phân giải ENS</div>
       ) : ensAddress ? (
         <em className="text-green-500 text-xs">{ensAddress}</em>
       ) : ensAddress === null ? (
-        <div className="text-red-400 text-xs">Invalid ENS</div>
+        <div className="text-red-400 text-xs">ENS không hợp lệ</div>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -317,9 +317,9 @@ function FieldInfo({
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

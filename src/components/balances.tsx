@@ -70,7 +70,7 @@ export default function Balances() {
     queryKey: ["token-list"],
     queryFn: async () => {
       const res = await fetch("/token-list.json");
-      if (!res.ok) throw new Error("Failed to fetch token list");
+      if (!res.ok) throw new Error("Không thể tải danh sách token");
       return res.json() as Promise<{ tokens: TokenListToken[] }>;
     },
     staleTime: Infinity,
@@ -115,7 +115,7 @@ export default function Balances() {
     queryKey: ["nft-list"],
     queryFn: async () => {
       const res = await fetch("/nft-list.json");
-      if (!res.ok) throw new Error("Failed to fetch NFT list");
+      if (!res.ok) throw new Error("Không thể tải danh sách NFT");
       return res.json() as Promise<{ collections: NftCollection[] }>;
     },
     staleTime: Infinity,
@@ -213,7 +213,7 @@ export default function Balances() {
   return (
     <div className="flex flex-col border-2 border-primary gap-2 pb-8">
       <div className="flex flex-row justify-between items-center bg-primary text-secondary pl-1">
-        <h1 className="text-md font-bold">Balances</h1>
+        <h1 className="text-md font-bold">Số dư</h1>
       </div>
       <Tabs defaultValue="token" className="w-full">
         <div className="flex flex-row items-center justify-between p-4">
@@ -228,7 +228,7 @@ export default function Balances() {
             className="hover:cursor-pointer"
           >
             <RotateCw />
-            Refresh
+            Làm mới
           </Button>
         </div>
 
@@ -240,7 +240,7 @@ export default function Balances() {
             <NativeBalanceRow
               address={address}
               chainId={CHAIN_ID}
-              name={nativeCurrency?.name ?? "Native"}
+              name={nativeCurrency?.name ?? "Gốc"}
               symbol={nativeCurrency?.symbol ?? "—"}
               decimals={nativeCurrency?.decimals ?? 18}
               isQueryEnabled={isQueryEnabled}
@@ -303,7 +303,7 @@ export default function Balances() {
                 className="flex flex-row items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
-                Add custom token
+                Thêm token tùy chỉnh
               </button>
             )}
           </div>
@@ -320,7 +320,7 @@ export default function Balances() {
             ) : (
               <>
                 {ownedNfts.length === 0 && customNftsForChain.length === 0 && (
-                  <p className="text-xs text-muted-foreground">No NFTs found</p>
+                  <p className="text-xs text-muted-foreground">Không tìm thấy NFT nào</p>
                 )}
                 {ownedNfts.map((nft) => (
                   <NftRow
@@ -369,7 +369,7 @@ export default function Balances() {
                 className="flex flex-row items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
-                Add custom NFT collection
+                Thêm bộ sưu tập NFT tùy chỉnh
               </button>
             )}
           </div>
@@ -464,15 +464,13 @@ function BalanceRow({
             </button>
           )}
         </div>
-        <p className="text-sm text-muted-foreground">-- %</p>
       </div>
       <div className="flex flex-col gap-1 text-right">
-        <p className="text-sm text-muted-foreground">$ --</p>
         <div className="flex flex-row gap-2 items-center justify-end">
           {isLoading ? (
             <Skeleton className="w-10 h-4" />
           ) : isError ? (
-            <span className="text-xs text-destructive">error</span>
+            <span className="text-xs text-destructive">lỗi</span>
           ) : (
             <div>{value}</div>
           )}
@@ -498,7 +496,7 @@ function BalanceRow({
               <DropdownMenuContent align="end">
                 <DropdownMenuItem variant="destructive" onClick={onRemove}>
                   <Trash2 className="w-3 h-3" />
-                  Remove
+                  Gỡ
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -549,7 +547,7 @@ function NftCollectionRow({
           <DropdownMenuContent align="end">
             <DropdownMenuItem variant="destructive" onClick={onRemove}>
               <Trash2 className="w-3 h-3" />
-              Remove
+              Gỡ
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -600,7 +598,7 @@ function NftRow({
             <DropdownMenuContent align="end">
               <DropdownMenuItem variant="destructive" onClick={onRemoveCollection}>
                 <Trash2 className="w-3 h-3" />
-                Remove collection
+                Gỡ bộ sưu tập
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

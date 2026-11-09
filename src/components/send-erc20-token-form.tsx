@@ -274,7 +274,7 @@ export default function SendErc20TokenForm() {
             validators={{
               onChange: ({ value }) => {
                 if (!value) {
-                  return "Please enter a token address";
+                  return "Vui lòng nhập địa chỉ token";
                 }
                 return undefined;
               },
@@ -297,7 +297,7 @@ export default function SendErc20TokenForm() {
                       value={field.state.value || ""}
                       onChange={(e) => field.handleChange(e.target.value)}
                       type="text"
-                      placeholder="Address (0x...) or ENS (.eth)"
+                      placeholder="Địa chỉ (0x...) hoặc ENS (.eth)"
                       className="text-base"
                       required
                     />
@@ -305,7 +305,7 @@ export default function SendErc20TokenForm() {
                       <InputGroupButton
                         type="button"
                         onClick={() => refetchTokenEnsAddress()}
-                        title="Look up ENS"
+                        title="Tra cứu ENS"
                         className="hover:cursor-pointer"
                       >
                         {isLoadingTokenEnsAddress ? (
@@ -343,18 +343,18 @@ export default function SendErc20TokenForm() {
               onChange: ({ value }) => {
                 // Check if empty
                 if (!value) {
-                  return "Please enter an amount to send";
+                  return "Vui lòng nhập số lượng cần gửi";
                 }
 
                 // Convert to number and check if it's valid
                 const numValue = parseFloat(value);
                 if (isNaN(numValue)) {
-                  return "Please enter a valid number";
+                  return "Vui lòng nhập số hợp lệ";
                 }
 
                 // Check if negative
                 if (numValue <= 0) {
-                  return "Amount must be greater than 0";
+                  return "Số lượng phải lớn hơn 0";
                 }
 
                 // Try to parse ether and check balance
@@ -364,11 +364,11 @@ export default function SendErc20TokenForm() {
                     tokenData?.[0]?.result &&
                     valueInWei > tokenData?.[0]?.result
                   ) {
-                    return "Insufficient balance";
+                    return "Số dư không đủ";
                   }
                 } catch {
                   // Handle parseUnits errors for invalid decimal places
-                  return "Invalid amount format";
+                  return "Định dạng số lượng không hợp lệ";
                 }
 
                 return undefined;
@@ -378,7 +378,7 @@ export default function SendErc20TokenForm() {
             {(field) => (
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row gap-2 items-center justify-between">
-                  <p className="text-muted-foreground">Sending</p>
+                  <p className="text-muted-foreground">Số lượng gửi</p>
                   <div className="flex flex-row gap-4">
                     <button
                       type="button"
@@ -435,7 +435,7 @@ export default function SendErc20TokenForm() {
                       }
                       className="hover:cursor-pointer underline underline-offset-4"
                     >
-                      Max
+                      Tối đa
                     </button>
                   </div>
                 </div>
@@ -504,7 +504,7 @@ export default function SendErc20TokenForm() {
             validators={{
               onChange: ({ value }) => {
                 if (!value) {
-                  return "Please enter an address or ENS";
+                  return "Vui lòng nhập địa chỉ hoặc ENS";
                 }
                 return undefined;
               },
@@ -513,10 +513,10 @@ export default function SendErc20TokenForm() {
             {(field) => (
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row gap-2 items-center">
-                  <p className="text-muted-foreground">Recipient</p>
+                  <p className="text-muted-foreground">Người nhận</p>
                   <InformationDialog
-                      title="Recipient"
-                      content="Enter the address of the recipient. You can also enter an ENS name to resolve it to an address. Make sure to click the search icon to resolve the ENS name after input."
+                      title="Người nhận"
+                      content="Nhập địa chỉ người nhận. Bạn cũng có thể nhập tên ENS để phân giải thành địa chỉ. Hãy nhớ nhấn biểu tượng tìm kiếm để phân giải tên ENS sau khi nhập."
                     />
                 </div>
                 <InputGroup className="border-primary">
@@ -526,7 +526,7 @@ export default function SendErc20TokenForm() {
                     value={field.state.value || ""}
                     onChange={(e) => field.handleChange(e.target.value)}
                     type="text"
-                    placeholder="Address (0x...) or ENS (.eth)"
+                    placeholder="Địa chỉ (0x...) hoặc ENS (.eth)"
                     className="text-base rounded-none"
                     required
                     data-1p-ignore
@@ -537,7 +537,7 @@ export default function SendErc20TokenForm() {
                     <InputGroupButton
                       type="button"
                       onClick={() => refetchEnsAddress()}
-                      title="Look up ENS"
+                      title="Tra cứu ENS"
                       className="hover:cursor-pointer"
                     >
                       {isLoadingEnsAddress ? (
@@ -566,7 +566,7 @@ export default function SendErc20TokenForm() {
             {(field) => (
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row gap-2 items-center justify-between">
-                  <p className="text-muted-foreground">Gas Preset</p>
+                  <p className="text-muted-foreground">Mức phí gas</p>
                   <div className="flex flex-row gap-4">
                     <button
                       type="button"
@@ -582,7 +582,7 @@ export default function SendErc20TokenForm() {
                         )
                       }
                     >
-                      Slow
+                      Chậm
                     </button>
                     <button
                       type="button"
@@ -593,7 +593,7 @@ export default function SendErc20TokenForm() {
                         )
                       }
                     >
-                      Normal
+                      Thường
                     </button>
                     <button
                       type="button"
@@ -609,7 +609,7 @@ export default function SendErc20TokenForm() {
                         )
                       }
                     >
-                      Fast
+                      Nhanh
                     </button>
                   </div>
                 </div>
@@ -644,7 +644,7 @@ export default function SendErc20TokenForm() {
             name="password"
             validators={{
               onChange: ({ value }) =>
-                !value ? "Please enter your wallet password" : undefined,
+                !value ? "Vui lòng nhập mật khẩu ví" : undefined,
             }}
           >
             {(field) => (
@@ -656,7 +656,7 @@ export default function SendErc20TokenForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   className="rounded-none border-primary"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   required
                 />
                 <PasswordFieldInfo field={field} />
@@ -689,7 +689,7 @@ export default function SendErc20TokenForm() {
                   }
                   onClick={handleReset}
                 >
-                  Reset
+                  Đặt lại
                 </Button>
                 <Button
                   className="hover:cursor-pointer rounded-none col-span-2"
@@ -713,7 +713,7 @@ export default function SendErc20TokenForm() {
                       <Check className="w-4 h-4" />
                     </>
                   ) : (
-                    <>Send</>
+                    <>Gửi</>
                   )}
                 </Button>
               </div>
@@ -748,12 +748,12 @@ function TokenAddressFieldInfo({
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a token address or ENS</em>
+        <em>Vui lòng nhập địa chỉ token hoặc ENS</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter a token address or ENS"
+            "Vui lòng nhập địa chỉ token hoặc ENS"
               ? ""
               : "text-red-400"
           }`}
@@ -763,15 +763,15 @@ function TokenAddressFieldInfo({
       ) : isLoadingEnsAddress ? (
         <Skeleton className="w-10 h-4" />
       ) : isErrorEnsAddress ? (
-        <div className="text-red-400 text-xs">Failed to resolve ENS</div>
+        <div className="text-red-400 text-xs">Không thể phân giải ENS</div>
       ) : ensAddress ? (
         <em className="text-green-500 text-xs">{ensAddress}</em>
       ) : ensAddress === null ? (
-        <div className="text-red-400 text-xs">Invalid ENS</div>
+        <div className="text-red-400 text-xs">ENS không hợp lệ</div>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -780,12 +780,12 @@ function AmountFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter an amount to send</em>
+        <em>Vui lòng nhập số lượng cần gửi</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter an amount to send"
+            "Vui lòng nhập số lượng cần gửi"
               ? ""
               : "text-red-400"
           }`}
@@ -793,9 +793,9 @@ function AmountFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -814,12 +814,12 @@ function ReceivingAddressFieldInfo({
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter an address or ENS</em>
+        <em>Vui lòng nhập địa chỉ hoặc ENS</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter an address or ENS"
+            "Vui lòng nhập địa chỉ hoặc ENS"
               ? ""
               : "text-red-400"
           }`}
@@ -829,15 +829,15 @@ function ReceivingAddressFieldInfo({
       ) : isLoadingEnsAddress ? (
         <Skeleton className="w-10 h-4" />
       ) : isErrorEnsAddress ? (
-        <div className="text-red-400 text-xs">Failed to resolve ENS</div>
+        <div className="text-red-400 text-xs">Không thể phân giải ENS</div>
       ) : ensAddress ? (
         <em className="text-green-500 text-xs">{ensAddress}</em>
       ) : ensAddress === null ? (
-        <div className="text-red-400 text-xs">Invalid ENS</div>
+        <div className="text-red-400 text-xs">ENS không hợp lệ</div>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -846,12 +846,12 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter your wallet password</em>
+        <em>Vui lòng nhập mật khẩu ví</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
             field.state.meta.errors.join(",") ===
-            "Please enter your wallet password"
+            "Vui lòng nhập mật khẩu ví"
               ? ""
               : "text-red-400"
           }`}
@@ -859,9 +859,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

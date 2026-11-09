@@ -8,7 +8,6 @@ import { settingsAtom } from "@/atoms/settingsAtom";
 import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { Loader2, Download, Eye, EyeOff } from "lucide-react";
@@ -47,7 +46,7 @@ interface UmWalletBackup {
 
 import { KDF_ITERATIONS, encrypt } from "@/lib/crypto";
 
-// ── Export tab ───────────────────────────────────────────────────────────────
+// ── Export ──────────────────────────────────────────────────────────────────
 
 function ExportBackup() {
   const wallets = useAtomValue(walletsAtom);
@@ -106,18 +105,18 @@ function ExportBackup() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-1 text-xs text-muted-foreground">
         <p>
-          Exports all wallets, contacts, settings, and activity into an encrypted <span className="font-mono">.json</span> backup.
-          Encrypted with AES-GCM 256-bit + PBKDF2 (600,000 iterations).
+          Xuất toàn bộ ví, danh bạ, cài đặt và hoạt động thành một bản sao lưu <span className="font-mono">.json</span> đã mã hóa.
+          Mã hóa bằng AES-GCM 256-bit + PBKDF2 (600.000 vòng lặp).
         </p>
-        <p>Keep your password safe — it cannot be recovered.</p>
+        <p>Hãy giữ mật khẩu cẩn thận — mật khẩu không thể khôi phục.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-1 text-xs border border-border p-3">
-        <span className="text-muted-foreground">Wallets</span>
+        <span className="text-muted-foreground">Ví</span>
         <span className="font-mono">{wallets.length}</span>
-        <span className="text-muted-foreground">Contacts</span>
+        <span className="text-muted-foreground">Liên hệ</span>
         <span className="font-mono">{contacts.length}</span>
-        <span className="text-muted-foreground">Activity records</span>
+        <span className="text-muted-foreground">Bản ghi hoạt động</span>
         <span className="font-mono">{activity?.length ?? 0}</span>
       </div>
 
@@ -133,7 +132,7 @@ function ExportBackup() {
           name="password"
           validators={{
             onChange: ({ value }) =>
-              !value ? "Please enter a password" : undefined,
+              !value ? "Vui lòng nhập mật khẩu" : undefined,
           }}
         >
           {(field) => (
@@ -145,7 +144,7 @@ function ExportBackup() {
                   value={field.state.value}
                   onChange={(e) => field.handleChange(e.target.value)}
                   type={showPassword ? "text" : "password"}
-                  placeholder="Backup password"
+                  placeholder="Mật khẩu sao lưu"
                   className="text-base"
                   required
                 />
@@ -159,7 +158,7 @@ function ExportBackup() {
                   </InputGroupButton>
                 </InputGroupAddon>
               </InputGroup>
-              <FieldInfo field={field} placeholder="Please enter a password" />
+              <FieldInfo field={field} placeholder="Vui lòng nhập mật khẩu" />
             </div>
           )}
         </form.Field>
@@ -176,7 +175,7 @@ function ExportBackup() {
               ) : (
                 <>
                   <Download className="w-4 h-4" />
-                  Download backup
+                  Tải bản sao lưu
                 </>
               )}
             </Button>
@@ -187,35 +186,16 @@ function ExportBackup() {
   );
 }
 
-// ── Import tab ───────────────────────────────────────────────────────────────
-
-function ImportBackup() {
-  return (
-    <p className="text-sm text-muted-foreground">Coming soon.</p>
-  );
-}
-
 // ── Root component ───────────────────────────────────────────────────────────
 
 export default function LocalDeviceBackup() {
   return (
     <div className="flex flex-col border-2 border-primary gap-2 pb-8 h-fit">
       <div className="flex flex-row justify-between items-center bg-primary text-secondary pl-1">
-        <h1 className="text-md font-bold">Local device backup</h1>
+        <h1 className="text-md font-bold">Sao lưu trên thiết bị</h1>
       </div>
       <div className="px-4 py-2">
-        <Tabs defaultValue="export" className="w-full">
-          <TabsList className="border-primary border rounded-none">
-            <TabsTrigger className="rounded-none" value="export">Export</TabsTrigger>
-            <TabsTrigger className="rounded-none" value="import">Import</TabsTrigger>
-          </TabsList>
-          <TabsContent value="export">
-            <ExportBackup />
-          </TabsContent>
-          <TabsContent value="import">
-            <ImportBackup />
-          </TabsContent>
-        </Tabs>
+        <ExportBackup />
       </div>
     </div>
   );
@@ -231,7 +211,7 @@ function FieldInfo({ field, placeholder }: { field: AnyFieldApi; placeholder: st
       ) : !field.state.meta.isValid ? (
         <em className="text-xs text-red-400">{field.state.meta.errors.join(", ")}</em>
       ) : (
-        <em className="text-xs text-green-500">ok!</em>
+        <em className="text-xs text-green-500">hợp lệ!</em>
       )}
     </>
   );

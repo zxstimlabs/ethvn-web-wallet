@@ -44,7 +44,7 @@ export default function AddCustomNft({
   function handleLookup() {
     setError(null);
     if (!isValid(input)) {
-      setError("Must be a valid 0x address (42 chars)");
+      setError("Phải là địa chỉ 0x hợp lệ (42 ký tự)");
       return;
     }
     setQueryAddress(input.trim() as `0x${string}`);
@@ -64,7 +64,7 @@ export default function AddCustomNft({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row items-center justify-between">
-        <p className="text-xs font-semibold">Add custom NFT collection</p>
+        <p className="text-xs font-semibold">Thêm bộ sưu tập NFT tùy chỉnh</p>
         <button
           type="button"
           onClick={onCancel}
@@ -77,7 +77,7 @@ export default function AddCustomNft({
       <div className="flex flex-row gap-2">
         <Input
           className="rounded-none h-7 text-xs flex-1"
-          placeholder="Collection address (0x...)"
+          placeholder="Địa chỉ bộ sưu tập (0x...)"
           value={input}
           onChange={(e) => {
             setInput(e.target.value);
@@ -93,7 +93,7 @@ export default function AddCustomNft({
           onClick={handleLookup}
           disabled={busy}
         >
-          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : "Look up"}
+          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : "Tra cứu"}
         </Button>
       </div>
 
@@ -108,14 +108,14 @@ export default function AddCustomNft({
             className="rounded-none h-6 text-xs px-2 hover:cursor-pointer"
             onClick={handleAdd}
           >
-            Add
+            Thêm
           </Button>
         </div>
       )}
 
       {fetchFailed && (
         <p className="text-xs text-red-400">
-          Could not fetch collection metadata. Check the address and try again.
+          Không thể lấy metadata của bộ sưu tập. Hãy kiểm tra địa chỉ và thử lại.
         </p>
       )}
       {error && <p className="text-xs text-red-400">{error}</p>}

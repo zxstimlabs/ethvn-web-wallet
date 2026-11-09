@@ -29,49 +29,49 @@ describe("validateUrl", () => {
   // ── Empty / blank input ──────────────────────────────────────────────────────
 
   test("returns error for empty string", () => {
-    expect(validateUrl("")).toBe("RPC URL is required");
+    expect(validateUrl("")).toBe("Vui lòng nhập URL RPC");
   });
 
   test("returns error for whitespace-only string", () => {
-    expect(validateUrl("   ")).toBe("RPC URL is required");
+    expect(validateUrl("   ")).toBe("Vui lòng nhập URL RPC");
   });
 
   // ── Invalid protocol ─────────────────────────────────────────────────────────
 
   test("returns error for ws:// protocol", () => {
     expect(validateUrl("ws://rpc.example.com")).toBe(
-      "RPC URL must use http or https"
+      "URL RPC phải dùng http hoặc https"
     );
   });
 
   test("returns error for wss:// protocol", () => {
     expect(validateUrl("wss://rpc.example.com")).toBe(
-      "RPC URL must use http or https"
+      "URL RPC phải dùng http hoặc https"
     );
   });
 
   test("returns error for ftp:// protocol", () => {
     expect(validateUrl("ftp://rpc.example.com")).toBe(
-      "RPC URL must use http or https"
+      "URL RPC phải dùng http hoặc https"
     );
   });
 
   // ── Malformed URLs ───────────────────────────────────────────────────────────
 
   test("returns error for a plain string with no protocol", () => {
-    expect(validateUrl("rpc.example.com")).toBe("Invalid URL");
+    expect(validateUrl("rpc.example.com")).toBe("URL không hợp lệ");
   });
 
   test("returns error for a string with just slashes", () => {
-    expect(validateUrl("//rpc.example.com")).toBe("Invalid URL");
+    expect(validateUrl("//rpc.example.com")).toBe("URL không hợp lệ");
   });
 
   test("returns error for a random word", () => {
-    expect(validateUrl("notaurl")).toBe("Invalid URL");
+    expect(validateUrl("notaurl")).toBe("URL không hợp lệ");
   });
 
   test("returns error for a URL with no host", () => {
-    expect(validateUrl("https://")).toBe("Invalid URL");
+    expect(validateUrl("https://")).toBe("URL không hợp lệ");
   });
 
   // ── Return type ───────────────────────────────────────────────────────────────

@@ -40,7 +40,7 @@ export function TokenPickerDialog({
     queryKey: ["token-list"],
     queryFn: async () => {
       const res = await fetch("/token-list.json");
-      if (!res.ok) throw new Error("Failed to fetch token list");
+      if (!res.ok) throw new Error("Không thể tải danh sách token");
       return res.json() as Promise<{ tokens: TokenListToken[] }>;
     },
     staleTime: Infinity,
@@ -113,26 +113,26 @@ export function TokenPickerDialog({
           <Loader2 className="w-3 h-3 animate-spin text-muted-foreground" />
         ) : (
           <>
-            <span>{selected ? selected.symbol : "Select"}</span>
+            <span>{selected ? selected.symbol : "Chọn"}</span>
             <ChevronDown className="w-3 h-3 text-muted-foreground" />
           </>
         )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Select token</DialogTitle>
+          <DialogTitle>Chọn token</DialogTitle>
         </DialogHeader>
         <input
           autoFocus
           type="text"
-          placeholder="Search by name or symbol..."
+          placeholder="Tìm theo tên hoặc ký hiệu..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full border border-input bg-transparent px-2.5 py-2 text-xs outline-none placeholder:text-muted-foreground"
         />
         <div className="flex flex-col max-h-64 overflow-y-auto">
           {filtered.length === 0 ? (
-            <p className="px-2.5 py-2 text-xs text-muted-foreground">No tokens found</p>
+            <p className="px-2.5 py-2 text-xs text-muted-foreground">Không tìm thấy token nào</p>
           ) : (
             filtered.map((token) => {
               return (

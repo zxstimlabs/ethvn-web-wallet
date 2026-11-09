@@ -67,8 +67,8 @@ export default function DeleteWallet() {
     <div className="flex flex-col gap-2">
       <h2 className="text-md text-muted-foreground">
         {activeWallet
-          ? `Follow the steps below to delete your current active wallet`
-          : "Select a wallet above to delete"}
+          ? `Làm theo các bước bên dưới để xóa ví đang dùng`
+          : "Chọn một ví ở trên để xóa"}
       </h2>
       <form
         onSubmit={(e) => {
@@ -82,13 +82,13 @@ export default function DeleteWallet() {
             <div className="w-6 h-6 bg-primary text-secondary flex items-center justify-center">
               1
             </div>
-            <div>Enter your wallet password</div>
+            <div>Nhập mật khẩu ví</div>
           </div>
           <deleteWalletForm.Field
             name="password"
             validators={{
               onChange: ({ value }) =>
-                !value ? "Please enter a password" : undefined,
+                !value ? "Vui lòng nhập mật khẩu" : undefined,
             }}
           >
             {(field) => (
@@ -99,7 +99,7 @@ export default function DeleteWallet() {
                   value={field.state.value || ""}
                   onChange={(e) => field.handleChange(e.target.value)}
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   className="rounded-none border-primary text-base"
                   required
                 />
@@ -112,7 +112,7 @@ export default function DeleteWallet() {
             <div className="w-6 h-6 bg-primary text-secondary flex items-center justify-center">
               2
             </div>
-            <div>Confirm to proceed with deleting your wallet</div>
+            <div>Xác nhận để tiến hành xóa ví</div>
           </div>
           <deleteWalletForm.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
@@ -129,7 +129,7 @@ export default function DeleteWallet() {
                       <Loader2 className="w-4 h-4 animate-spin" />
                     </>
                   ) : (
-                    <>Delete</>
+                    <>Xóa</>
                   )}
                 </Button>
                 <Button
@@ -144,7 +144,7 @@ export default function DeleteWallet() {
                     setWrongPassword(false);
                   }}
                 >
-                  Reset
+                  Đặt lại
                 </Button>
               </div>
             )}
@@ -153,7 +153,7 @@ export default function DeleteWallet() {
       </form>
       {wrongPassword && (
         <div className="flex flex-row gap-2 items-center bg-red-500 p-2 text-white">
-          <p className="text-sm">Wrong password. Please try again.</p>
+          <p className="text-sm">Sai mật khẩu. Vui lòng thử lại.</p>
         </div>
       )}
     </div>
@@ -164,11 +164,11 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a password</em>
+        <em>Vui lòng nhập mật khẩu</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a password"
+            field.state.meta.errors.join(",") === "Vui lòng nhập mật khẩu"
               ? ""
               : "text-red-400"
           }`}
@@ -176,9 +176,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

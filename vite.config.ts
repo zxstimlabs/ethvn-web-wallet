@@ -21,7 +21,7 @@ export default defineConfig({
       manifest: {
         name: "UnitMetal Web Wallet",
         short_name: "UnitMetalW",
-        description: "Super lightweight web wallet for professionals",
+        description: "Ví web siêu nhẹ dành cho người dùng chuyên nghiệp",
         theme_color: "#000000",
         background_color: "#000000",
         display: "standalone",

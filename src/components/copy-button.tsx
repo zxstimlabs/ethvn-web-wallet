@@ -33,10 +33,10 @@ export default function CopyButton({
       {isCopied ? (
         <div className="flex flex-row gap-2 items-center">
           <Check className="h-4 w-4" />
-          Copied!
+          Đã sao chép!
         </div>
       ) : (
-        <div className="flex flex-row gap-2 items-center">Copy</div>
+        <div className="flex flex-row gap-2 items-center">Sao chép</div>
       )}
     </Button>
   );

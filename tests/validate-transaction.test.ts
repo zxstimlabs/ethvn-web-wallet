@@ -45,7 +45,7 @@ describe("validateTransaction", () => {
   // ── Empty / missing input ──────────────────────────────────────────────────
 
   test("returns error string for empty input", () => {
-    expect(validateTransaction("")).toBe("Please enter the transaction JSON");
+    expect(validateTransaction("")).toBe("Vui lòng nhập JSON giao dịch");
   });
 
   test("returns error string for whitespace-only input", () => {
@@ -57,19 +57,19 @@ describe("validateTransaction", () => {
   // ── Invalid JSON ───────────────────────────────────────────────────────────
 
   test("returns error string for malformed JSON", () => {
-    expect(validateTransaction("{not json}")).toBe("Invalid JSON format");
+    expect(validateTransaction("{not json}")).toBe("Định dạng JSON không hợp lệ");
   });
 
   test("returns error string for JSON array instead of object", () => {
-    expect(validateTransaction("[1, 2, 3]")).toBe("Missing 'to' address");
+    expect(validateTransaction("[1, 2, 3]")).toBe("Thiếu địa chỉ 'to'");
   });
 
   test("returns error string for JSON string", () => {
-    expect(validateTransaction('"just a string"')).toBe("Missing 'to' address");
+    expect(validateTransaction('"just a string"')).toBe("Thiếu địa chỉ 'to'");
   });
 
   test("returns error string for JSON number", () => {
-    expect(validateTransaction("42")).toBe("Missing 'to' address");
+    expect(validateTransaction("42")).toBe("Thiếu địa chỉ 'to'");
   });
 
   test("returns error string for JSON null", () => {
@@ -81,25 +81,25 @@ describe("validateTransaction", () => {
 
   test("returns error string when 'to' is missing", () => {
     expect(validateTransaction(JSON.stringify({ chainId: 1 }))).toBe(
-      "Missing 'to' address"
+      "Thiếu địa chỉ 'to'"
     );
   });
 
   test("returns error string when 'to' is not a string", () => {
     expect(validateTransaction(JSON.stringify({ to: 12345, chainId: 1 }))).toBe(
-      "Missing 'to' address"
+      "Thiếu địa chỉ 'to'"
     );
   });
 
   test("returns error string when 'to' is null", () => {
     expect(validateTransaction(JSON.stringify({ to: null, chainId: 1 }))).toBe(
-      "Missing 'to' address"
+      "Thiếu địa chỉ 'to'"
     );
   });
 
   test("returns error string when 'to' is an object", () => {
     expect(validateTransaction(JSON.stringify({ to: {}, chainId: 1 }))).toBe(
-      "Missing 'to' address"
+      "Thiếu địa chỉ 'to'"
     );
   });
 
@@ -107,26 +107,26 @@ describe("validateTransaction", () => {
 
   test("returns error string when 'chainId' is missing", () => {
     expect(validateTransaction(JSON.stringify({ to: ADDR }))).toBe(
-      "Missing or invalid 'chainId' (must be a number)"
+      "Thiếu hoặc sai 'chainId' (phải là số)"
     );
   });
 
   test("returns error string when 'chainId' is a string instead of number", () => {
     expect(
       validateTransaction(JSON.stringify({ to: ADDR, chainId: "1" }))
-    ).toBe("Missing or invalid 'chainId' (must be a number)");
+    ).toBe("Thiếu hoặc sai 'chainId' (phải là số)");
   });
 
   test("returns error string when 'chainId' is null", () => {
     expect(
       validateTransaction(JSON.stringify({ to: ADDR, chainId: null }))
-    ).toBe("Missing or invalid 'chainId' (must be a number)");
+    ).toBe("Thiếu hoặc sai 'chainId' (phải là số)");
   });
 
   test("returns error string when 'chainId' is a boolean", () => {
     expect(
       validateTransaction(JSON.stringify({ to: ADDR, chainId: true }))
-    ).toBe("Missing or invalid 'chainId' (must be a number)");
+    ).toBe("Thiếu hoặc sai 'chainId' (phải là số)");
   });
 
   // ── Return type discrimination ─────────────────────────────────────────────

@@ -36,7 +36,7 @@ export function TransactionStatus({
         <Alert variant="destructive">
           <AlertCircle />
           <AlertTitle className="flex items-center justify-between">
-            Error
+            Lỗi
             {onClearError && (
               <button onClick={onClearError} className="hover:opacity-70">
                 <X className="w-3.5 h-3.5" />
@@ -53,17 +53,17 @@ export function TransactionStatus({
             {isPending ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-                <p>Pending signature</p>
+                <p>Đang chờ ký</p>
               </>
             ) : isConfirming || isConfirmed || txHash ? (
               <>
                 <Check className="w-4 h-4 shrink-0" />
-                <p>Signed</p>
+                <p>Đã ký</p>
               </>
             ) : (
               <>
                 <CircleDashed className="w-4 h-4 shrink-0 text-muted-foreground" />
-                <p className="text-muted-foreground">Nothing to sign</p>
+                <p className="text-muted-foreground">Chưa có gì để ký</p>
               </>
             )}
           </div>
@@ -72,7 +72,7 @@ export function TransactionStatus({
             {isConfirmed && txHash ? (
               <>
                 <Check className="w-4 h-4 shrink-0" />
-                <p>Confirmed</p>
+                <p>Đã xác nhận</p>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -91,7 +91,7 @@ export function TransactionStatus({
             ) : isConfirming && txHash ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-                <p>Confirming</p>
+                <p>Đang xác nhận</p>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -110,7 +110,7 @@ export function TransactionStatus({
             ) : (
               <>
                 <CircleDashed className="w-4 h-4 shrink-0 text-muted-foreground" />
-                <p className="text-muted-foreground">No transaction</p>
+                <p className="text-muted-foreground">Chưa có giao dịch</p>
               </>
             )}
           </div>

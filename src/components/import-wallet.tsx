@@ -105,7 +105,7 @@ export default function ImportWallet() {
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-2">
         <h3 className="text-md text-muted-foreground">
-          Import with keystore file
+          Nhập bằng tệp keystore
         </h3>
         <Input
           type="file"
@@ -125,14 +125,14 @@ export default function ImportWallet() {
           size="sm"
           className="w-fit rounded-none hover:cursor-pointer"
         >
-          Import
+          Nhập
         </Button>
         <div className="border-t-2 border-primary border-dotted" />
         <h3 className="text-md text-muted-foreground">
-          Import with keystore contents
+          Nhập bằng nội dung keystore
         </h3>
         <Textarea
-          placeholder="Paste your keystore file content here"
+          placeholder="Dán nội dung tệp keystore vào đây"
           className="rounded-none border-primary text-base"
           onChange={(e) => setPastedKeystore(e.target.value)}
           value={pastedKeystore || ""}
@@ -143,11 +143,11 @@ export default function ImportWallet() {
           size="sm"
           className="w-fit rounded-none hover:cursor-pointer"
         >
-          Import
+          Nhập
         </Button>
         <div className="border-t-2 border-primary border-dotted" />
         <h3 className="text-md text-muted-foreground">
-          Import with secret phrase
+          Nhập bằng cụm từ bí mật
         </h3>
         <form
           onSubmit={(e) => {
@@ -161,7 +161,7 @@ export default function ImportWallet() {
               name="name"
               validators={{
                 onChange: ({ value }) =>
-                  !value ? "Please enter a name" : undefined,
+                  !value ? "Vui lòng nhập tên" : undefined,
               }}
             >
               {(field) => (
@@ -172,7 +172,7 @@ export default function ImportWallet() {
                     value={field.state.value || ""}
                     onChange={(e) => field.handleChange(e.target.value)}
                     type="text"
-                    placeholder="Wallet name"
+                    placeholder="Tên ví"
                     className="rounded-none border-primary text-base"
                     required
                   />
@@ -184,7 +184,7 @@ export default function ImportWallet() {
               name="password"
               validators={{
                 onChange: ({ value }) =>
-                  !value ? "Please enter a password" : undefined,
+                  !value ? "Vui lòng nhập mật khẩu" : undefined,
               }}
             >
               {(field) => (
@@ -195,7 +195,7 @@ export default function ImportWallet() {
                     value={field.state.value || ""}
                     onChange={(e) => field.handleChange(e.target.value)}
                     type="password"
-                    placeholder="Strong password"
+                    placeholder="Mật khẩu mạnh"
                     className="rounded-none border-primary text-base"
                     required
                   />
@@ -207,7 +207,7 @@ export default function ImportWallet() {
               name="secretPhrase"
               validators={{
                 onChange: ({ value }) =>
-                  !value ? "Please enter a secret phrase" : undefined,
+                  !value ? "Vui lòng nhập cụm từ bí mật" : undefined,
               }}
             >
               {(field) => (
@@ -218,7 +218,7 @@ export default function ImportWallet() {
                     value={field.state.value || ""}
                     className="rounded-none border-primary text-base"
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="Enter your secret phrase here"
+                    placeholder="Nhập cụm từ bí mật vào đây"
                     required
                   />
                   <SecretPhraseFieldInfo field={field} />
@@ -240,7 +240,7 @@ export default function ImportWallet() {
                         <Loader2 className="w-4 h-4 animate-spin" />
                       </>
                     ) : (
-                      <>Create</>
+                      <>Tạo</>
                     )}
                   </Button>
                   <Button
@@ -253,7 +253,7 @@ export default function ImportWallet() {
                     }}
                     className="hover:cursor-pointer rounded-none border-secondary"
                   >
-                    Reset
+                    Đặt lại
                   </Button>
                 </div>
               )}
@@ -269,11 +269,11 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a name</em>
+        <em>Vui lòng nhập tên</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a name"
+            field.state.meta.errors.join(",") === "Vui lòng nhập tên"
               ? ""
               : "text-red-400"
           }`}
@@ -281,9 +281,9 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -292,11 +292,11 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a password</em>
+        <em>Vui lòng nhập mật khẩu</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a password"
+            field.state.meta.errors.join(",") === "Vui lòng nhập mật khẩu"
               ? ""
               : "text-red-400"
           }`}
@@ -304,9 +304,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -315,11 +315,11 @@ function SecretPhraseFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a secret phrase</em>
+        <em>Vui lòng nhập cụm từ bí mật</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a secret phrase"
+            field.state.meta.errors.join(",") === "Vui lòng nhập cụm từ bí mật"
               ? ""
               : "text-red-400"
           }`}
@@ -327,9 +327,9 @@ function SecretPhraseFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

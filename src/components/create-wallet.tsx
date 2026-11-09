@@ -57,7 +57,7 @@ export default function CreateWallet() {
 
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-md text-muted-foreground">Enter a name and a strong password to create a new wallet</h2>
+      <h2 className="text-md text-muted-foreground">Nhập tên và mật khẩu mạnh để tạo ví mới</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -70,7 +70,7 @@ export default function CreateWallet() {
             name="name"
             validators={{
               onChange: ({ value }) =>
-                !value ? "Please enter a name" : undefined,
+                !value ? "Vui lòng nhập tên" : undefined,
             }}
           >
             {(field) => (
@@ -81,7 +81,7 @@ export default function CreateWallet() {
                   value={field.state.value || ""}
                   onChange={(e) => field.handleChange(e.target.value)}
                   type="text"
-                  placeholder="Wallet name"
+                  placeholder="Tên ví"
                   className="rounded-none border-primary text-base"
                   required
                 />
@@ -93,7 +93,7 @@ export default function CreateWallet() {
             name="password"
             validators={{
               onChange: ({ value }) =>
-                !value ? "Please enter a password" : undefined,
+                !value ? "Vui lòng nhập mật khẩu" : undefined,
             }}
           >
             {(field) => (
@@ -105,7 +105,7 @@ export default function CreateWallet() {
                     value={field.state.value || ""}
                     onChange={(e) => field.handleChange(e.target.value)}
                     type={showPassword ? "text" : "password"}
-                    placeholder="Strong password"
+                    placeholder="Mật khẩu mạnh"
                     className="text-base"
                     required
                   />
@@ -142,7 +142,7 @@ export default function CreateWallet() {
                       <Loader2 className="w-4 h-4 animate-spin" />
                     </>
                   ) : (
-                    <>Create</>
+                    <>Tạo</>
                   )}
                 </Button>
                 <Button
@@ -155,7 +155,7 @@ export default function CreateWallet() {
                   }}
                   className="hover:cursor-pointer rounded-none border-secondary"
                 >
-                  Reset
+                  Đặt lại
                 </Button>
               </div>
             )}
@@ -170,11 +170,11 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a name</em>
+        <em>Vui lòng nhập tên</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a name"
+            field.state.meta.errors.join(",") === "Vui lòng nhập tên"
               ? ""
               : "text-red-400"
           }`}
@@ -182,9 +182,9 @@ function NameFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }
@@ -193,11 +193,11 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {!field.state.meta.isTouched ? (
-        <em>Please enter a password</em>
+        <em>Vui lòng nhập mật khẩu</em>
       ) : field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em
           className={`${
-            field.state.meta.errors.join(",") === "Please enter a password"
+            field.state.meta.errors.join(",") === "Vui lòng nhập mật khẩu"
               ? ""
               : "text-red-400"
           }`}
@@ -205,9 +205,9 @@ function PasswordFieldInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors.join(",")}
         </em>
       ) : (
-        <em className="text-green-500">ok!</em>
+        <em className="text-green-500">hợp lệ!</em>
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Đang kiểm tra..." : null}
     </>
   );
 }

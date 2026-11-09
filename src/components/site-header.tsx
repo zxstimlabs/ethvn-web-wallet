@@ -34,7 +34,7 @@ export default function SiteHeader() {
           <a href="/">
             <img
               src="/unitmetal-symbol.svg"
-              alt="UnitMetal Logo"
+              alt="Logo UnitMetal"
               width={30}
               height={30}
               className="max-w-48 dark:invert"
