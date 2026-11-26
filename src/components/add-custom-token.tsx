@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { TokenListToken } from "@/atoms/customTokensAtom";
 
-const CHAIN_ID = 1;
+import { CHAIN_ID } from "@/lib/chain";
 
 export default function AddCustomToken({
   onAdd,

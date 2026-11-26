@@ -13,6 +13,7 @@ import { useEnsAddress } from "wagmi";
 import { normalize } from "viem/ens";
 import type { Address } from "viem";
 import QrScannerButton from "@/components/qr-scanner-button";
+import { CHAIN_ID } from "@/lib/chain";
 
 export default function AddContactForm() {
   const [contacts, setContacts] = useAtom(contactsAtom);
@@ -65,7 +66,7 @@ export default function AddContactForm() {
     isError: isErrorEnsAddress,
     refetch: refetchEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name:
       addressValue &&
       addressValue.endsWith(".eth") &&

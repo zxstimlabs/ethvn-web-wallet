@@ -2,25 +2,25 @@ import { useAtom } from "jotai";
 import { walletsAtom } from "@/atoms/walletsAtom";
 import { Button } from "@/components/ui/button";
 import { TriangleAlert } from "lucide-react";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 
-const CURRENT_UM_VERSION = "0.0.1";
+const CURRENT_FORMAT_VERSION = "0.0.1";
 const CURRENT_META_TYPE = "password-keystore-seedphrase";
 
-function needsMigration(wallet: UmKeystore): boolean {
+function needsMigration(wallet: WalletKeystore): boolean {
   return (
-    wallet.meta.umVersion !== CURRENT_UM_VERSION ||
+    wallet.meta.formatVersion !== CURRENT_FORMAT_VERSION ||
     wallet.meta.type !== CURRENT_META_TYPE
   );
 }
 
-function migrateWallet(wallet: UmKeystore): UmKeystore {
+function migrateWallet(wallet: WalletKeystore): WalletKeystore {
   return {
     ...wallet,
     meta: {
       ...wallet.meta,
       type: CURRENT_META_TYPE,
-      umVersion: CURRENT_UM_VERSION,
+      formatVersion: CURRENT_FORMAT_VERSION,
     },
   };
 }
@@ -43,11 +43,11 @@ export default function MigrationWalletStorage() {
       <div className="flex flex-row gap-2 items-center text-yellow-600 dark:text-yellow-400">
         <TriangleAlert className="w-4 h-4 shrink-0" />
         <p className="text-xs font-medium">
-          {staleCount} ví đang dùng định dạng lưu trữ cũ (thiếu <code>umVersion</code>).
+          {staleCount} ví đang dùng định dạng lưu trữ cũ (thiếu <code>formatVersion</code>).
         </p>
       </div>
       <p className="text-xs text-muted-foreground">
-        Nhấn bên dưới để chuyển sang định dạng hiện tại ({CURRENT_UM_VERSION}). Khóa không bị thay đổi — chỉ cập nhật metadata.
+        Nhấn bên dưới để chuyển sang định dạng hiện tại ({CURRENT_FORMAT_VERSION}). Khóa không bị thay đổi — chỉ cập nhật metadata.
       </p>
       <Button
         type="button"

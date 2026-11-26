@@ -4,11 +4,9 @@ import { settingsAtom } from "@/atoms/settingsAtom";
 import type { RpcEntry } from "@/types/setting";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { mainnet } from "wagmi/chains";
 import { Save, Trash2, Check } from "lucide-react";
 import { validateUrl } from "@/lib/settings";
-
-const DEFAULT_RPC_URL = import.meta.env.VITE_MAINNET_RPC_URL as string;
+import { CHAIN_ID, DEFAULT_RPC_URL } from "@/lib/chain";
 
 export default function RpcSettings() {
   const [settings, setSettings] = useAtom(settingsAtom);
@@ -24,7 +22,7 @@ export default function RpcSettings() {
       id: crypto.randomUUID(),
       name: newName.trim() || undefined,
       url: newUrl.trim(),
-      chainId: mainnet.id,
+      chainId: CHAIN_ID,
     };
     setSettings((prev) => ({ ...prev, rpcList: [...prev.rpcList, entry] }));
     setNewName("");
@@ -51,8 +49,12 @@ export default function RpcSettings() {
     window.location.reload();
   }
 
-  const activeUrl = settings.activeRpc?.url ?? DEFAULT_RPC_URL;
-  const isUsingCustomRpc = !!settings.activeRpc;
+  // RPCs saved for another chain (e.g. mainnet, before the switch to Sepolia) are
+  // ignored by providers.tsx, so don't offer them here either.
+  const rpcList = settings.rpcList.filter((r) => r.chainId === CHAIN_ID);
+  const activeRpc = settings.activeRpc?.chainId === CHAIN_ID ? settings.activeRpc : null;
+  const activeUrl = activeRpc?.url ?? DEFAULT_RPC_URL;
+  const isUsingCustomRpc = !!activeRpc;
 
   return (
     <div className="flex flex-col gap-6">
@@ -69,7 +71,7 @@ export default function RpcSettings() {
                 ? "border-primary text-primary"
                 : "border-muted-foreground text-muted-foreground"
             }`}>
-              {isUsingCustomRpc ? settings.activeRpc?.name ?? "tùy chỉnh" : "mặc định"}
+              {isUsingCustomRpc ? activeRpc?.name ?? "tùy chỉnh" : "mặc định"}
             </span>
             <code className="text-xs font-mono text-muted-foreground break-all">
               {activeUrl || "—"}
@@ -95,12 +97,12 @@ export default function RpcSettings() {
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold">RPC đã lưu</h2>
 
-        {settings.rpcList.length === 0 ? (
+        {rpcList.length === 0 ? (
           <p className="text-xs text-muted-foreground">Chưa lưu RPC tùy chỉnh nào.</p>
         ) : (
           <div className="flex flex-col gap-2">
-            {settings.rpcList.map((entry) => {
-              const isActive = settings.activeRpc?.id === entry.id;
+            {rpcList.map((entry) => {
+              const isActive = activeRpc?.id === entry.id;
               return (
                 <div
                   key={entry.id}

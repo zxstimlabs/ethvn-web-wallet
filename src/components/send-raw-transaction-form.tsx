@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useAtomValue } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import type { WagmiPreparedTransaction } from "@/types/transaction";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,9 +15,10 @@ import {
   useSendTransaction,
 } from "wagmi";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
-import { decryptWalletToAccount } from "@/lib/um-wallet";
+import { decryptWalletToAccount } from "@/lib/wallet";
 import { truncateAddress } from "@/lib/utils";
 import { TransactionStatus } from "@/components/transaction-status";
+import { CHAIN_ID } from "@/lib/chain";
 
 export function validateTransaction(value: string): WagmiPreparedTransaction | string {
   if (!value) {
@@ -39,7 +40,7 @@ export function validateTransaction(value: string): WagmiPreparedTransaction | s
 
 export default function SendRawTransactionForm() {
   const config = useConfig();
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
 
   const {
     data: rawTransactionHash,
@@ -95,7 +96,7 @@ export default function SendRawTransactionForm() {
     return chain?.name ?? `Chain ${chainId}`;
   };
 
-  const txChainId = parsedTransaction?.chainId ?? 1;
+  const txChainId = parsedTransaction?.chainId ?? CHAIN_ID;
 
   const {
     isLoading: isConfirmingRawTransaction,
@@ -153,7 +154,7 @@ export default function SendRawTransactionForm() {
                     value={field.state.value || ""}
                     onChange={(e) => field.handleChange(e.target.value)}
                     className="rounded-none"
-                    placeholder='{"to": "0x...", "chainId": 1, "type": "eip1559", "gas": "0x...", "maxFeePerGas": "0x...", "maxPriorityFeePerGas": "0x..."}'
+                    placeholder='{"to": "0x...", "chainId": 11155111, "type": "eip1559", "gas": "0x...", "maxFeePerGas": "0x...", "maxPriorityFeePerGas": "0x..."}'
                     required
                   />
                 </div>

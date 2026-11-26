@@ -16,9 +16,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CHAIN_ID } from "@/lib/chain";
 
 const ETH_SENTINEL = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
-const CHAIN_ID = 1;
 
 export function TokenPickerDialog({
   value,

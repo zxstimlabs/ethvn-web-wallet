@@ -1,6 +1,6 @@
-# UnitMetal Web Wallet
+# Ví ETH.vn
 
-A self-custodial Ethereum web wallet that runs entirely in the browser. No backend server, no external key storage — your keys never leave your device.
+A self-custodial Ethereum web wallet that runs entirely in the browser. It runs on the Sepolia testnet, so nothing of real value is at stake. No backend server, no external key storage — your keys never leave your device.
 
 ---
 
@@ -8,7 +8,7 @@ A self-custodial Ethereum web wallet that runs entirely in the browser. No backe
 
 ### What it does
 
-UnitMetal Web Wallet lets you create, import, and manage Ethereum wallets directly in the browser. All cryptographic operations (key generation, encryption, transaction signing) happen client-side using the browser's native Web Crypto API.
+Ví ETH.vn lets you create, import, and manage Ethereum wallets directly in the browser. All cryptographic operations (key generation, encryption, transaction signing) happen client-side using the browser's native Web Crypto API.
 
 **Supported operations:**
 - Create new wallets from a randomly generated BIP-39 mnemonic
@@ -50,13 +50,9 @@ bun preview    # Preview production build
 bun test       # Run tests (Vitest)
 ```
 
-**Environment variables** (prefix `VITE_`):
+**Chain and RPC:** the wallet runs on Sepolia. The chain and its default RPC (`https://rpc.zxstim.com/rpc/sepolia`) are set in `src/lib/chain.ts`; no environment variables are needed.
 
-```
-VITE_MAINNET_RPC_URL=https://...
-```
-
-A custom RPC URL can also be configured at runtime via the wallet settings UI; the persisted value takes precedence over the build-time env variable.
+A custom RPC URL can also be configured at runtime via the wallet settings UI; the persisted value takes precedence over the default.
 
 ---
 

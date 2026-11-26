@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { ThemeToggle } from "@/components/theme-toggle";
 import DesktopNavbar from "@/components/desktop-navbar";
+import { EthvnLogo } from "@/components/ethvn-logo";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,14 +32,8 @@ export default function SiteHeader() {
     <div className="flex flex-col gap-2 w-full">
       <div className="flex flex-row gap-2 items-center justify-between w-full">
         <div className="flex flex-row items-center gap-6">
-          <a href="/">
-            <img
-              src="/unitmetal-symbol.svg"
-              alt="Logo UnitMetal"
-              width={30}
-              height={30}
-              className="max-w-48 dark:invert"
-            />
+          <a href="/" className="text-foreground">
+            <EthvnLogo className="h-8 w-auto" />
           </a>
           <DesktopNavbar />
         </div>

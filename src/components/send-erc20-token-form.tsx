@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAtomValue } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm, useStore } from "@tanstack/react-form";
@@ -24,11 +24,12 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RefreshCcw } from "lucide-react";
-import { decryptWalletToAccount } from "@/lib/um-wallet";
+import { decryptWalletToAccount } from "@/lib/wallet";
 import { recordActivity } from "@/lib/activity";
 import type { ActivityRecord } from "@/types/activity";
 import { TransactionStatus } from "@/components/transaction-status";
 import { InformationDialog } from "@/components/information-dialog";
+import { CHAIN_ID } from "@/lib/chain";
 
 
 export default function SendErc20TokenForm() {
@@ -39,7 +40,7 @@ export default function SendErc20TokenForm() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // current active wallet
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
 
   // capture submit-time data to record on confirmation
   const pendingActivityRef = useRef<Omit<ActivityRecord, "id" | "timestamp" | "txHash"> | null>(null);
@@ -53,7 +54,7 @@ export default function SendErc20TokenForm() {
     query: {
       enabled: !!activeWallet?.address,
     },
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   // send form
@@ -102,7 +103,7 @@ export default function SendErc20TokenForm() {
           type: "erc20",
           from: activeWallet.address,
           to: recipientAddress,
-          chainId: 1,
+          chainId: CHAIN_ID,
           tokenValue: parseUnits(value.amount, decimals).toString(),
           tokenAddress: resolvedTokenAddr,
           tokenSymbol: tokenData?.[2]?.result as string | undefined,
@@ -117,7 +118,7 @@ export default function SendErc20TokenForm() {
           abi: erc20Abi,
           functionName: "transfer",
           args: [recipientAddress, parseUnits(value.amount, decimals)],
-          chainId: 1,
+          chainId: CHAIN_ID,
         });
       }
     },
@@ -136,7 +137,7 @@ export default function SendErc20TokenForm() {
     isError: isErrorTokenEnsAddress,
     refetch: refetchTokenEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name:
       tokenAddress &&
       tokenAddress.endsWith(".eth") &&
@@ -161,7 +162,7 @@ export default function SendErc20TokenForm() {
     isError: isErrorEnsAddress,
     refetch: refetchEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name:
       receivingAddress &&
       receivingAddress.endsWith(".eth") &&
@@ -188,25 +189,25 @@ export default function SendErc20TokenForm() {
         abi: erc20Abi,
         functionName: "balanceOf",
         args: [activeWallet?.address as Address],
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
       {
         address: tokenAddress.endsWith(".eth") ? tokenEnsAddress as Address : tokenAddress as Address,
         abi: erc20Abi,
         functionName: "name",
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
       {
         address: tokenAddress.endsWith(".eth") ? tokenEnsAddress as Address : tokenAddress as Address,
         abi: erc20Abi,
         functionName: "symbol",
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
       {
         address: tokenAddress.endsWith(".eth") ? tokenEnsAddress as Address : tokenAddress as Address,
         abi: erc20Abi,
         functionName: "decimals",
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
     ],
     query: {
@@ -228,7 +229,7 @@ export default function SendErc20TokenForm() {
     isSuccess: isConfirmedSendErc20Transaction,
   } = useWaitForTransactionReceipt({
     hash: sendErc20TransactionHash,
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   const selectedChainBlockExplorer = config.chains.find(

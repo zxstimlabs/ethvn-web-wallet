@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAtomValue, useAtom } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { offlineModeAtom } from "@/atoms/settingsAtom";
 import { customTokensAtom } from "@/atoms/customTokensAtom";
@@ -23,9 +23,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import AddCustomToken from "@/components/add-custom-token";
 import AddCustomNft from "@/components/add-custom-nft";
+import { CHAIN_ID } from "@/lib/chain";
 
 const ETH_SENTINEL = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
-const CHAIN_ID = 1;
 
 const erc721EnumerableAbi = [
   {
@@ -53,7 +53,7 @@ type OwnedNft = { collection: NftCollectionEntry; tokenId: bigint };
 
 export default function Balances() {
   const config = useConfig();
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
   const offlineMode = useAtomValue(offlineModeAtom);
   const [customTokens, setCustomTokens] = useAtom(customTokensAtom);
   const [customNfts, setCustomNfts] = useAtom(customNftsAtom);

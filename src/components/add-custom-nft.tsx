@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { NftCollection } from "@/atoms/customNftsAtom";
 
-const CHAIN_ID = 1;
+import { CHAIN_ID } from "@/lib/chain";
 
 const erc721MetaAbi = [
   { name: "name",   type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "string" }] },

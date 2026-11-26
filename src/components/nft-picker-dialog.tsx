@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const CHAIN_ID = 1;
+import { CHAIN_ID } from "@/lib/chain";
 
 // Same ABI as balances.tsx — identical contracts array → same wagmi cache key
 const erc721EnumerableAbi = [

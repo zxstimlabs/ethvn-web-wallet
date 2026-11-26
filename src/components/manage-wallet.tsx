@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import CreateWallet from "@/components/create-wallet";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import {
   Select,
   SelectContent,
@@ -26,8 +26,8 @@ import { QrCode } from "lucide-react";
 
 
 export default function ManageWallet() {
-  const wallets = useAtomValue<Array<UmKeystore>>(walletsAtom);
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const wallets = useAtomValue<Array<WalletKeystore>>(walletsAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
   const setActiveWallet = useSetAtom(activeWalletAtom);
 
   const walletItems = wallets.map((wallet) => ({

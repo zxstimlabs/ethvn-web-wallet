@@ -8,7 +8,7 @@ import { Loader2, Eye, EyeOff } from "lucide-react";
 import { Mnemonic, Keystore, Bytes } from "ox";
 import { useSetAtom } from "jotai";
 import { walletsAtom } from "@/atoms/walletsAtom";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { mnemonicToAccount } from "viem/accounts";
 
 export default function CreateWallet() {
@@ -41,11 +41,11 @@ export default function CreateWallet() {
         meta: {
           type: "password-keystore-seedphrase",
           note: "the 12 words secret phrase (aka mnemonic phrase) is encrypted with the password using the keystore encryption process",
-          umVersion: "0.0.1",
+          formatVersion: "0.0.1",
         },
         name: value.name,
         address: address,
-      } as UmKeystore;
+      } as WalletKeystore;
 
       // Add the new wallet to the list of wallets in browser storage.
       setWallets((prevWallets) => [...prevWallets, encryptedWithMeta]);

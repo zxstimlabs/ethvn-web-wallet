@@ -5,7 +5,7 @@ import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { Loader2 } from "lucide-react";
 import { Keystore, Bytes } from "ox";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { mnemonicToAccount } from "viem/accounts";
 import { Textarea } from "@/components/ui/textarea";
 import CopyButton from "@/components/copy-button";
@@ -13,7 +13,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function KeystoreWallet() {
   const [outputBackupKeystore, setOutputBackupKeystore] =
-    useState<UmKeystore | null>(null);
+    useState<WalletKeystore | null>(null);
 
   const [outputDecryptedMnemonicPhrase, setOutputDecryptedMnemonicPhrase] =
     useState<string | null>(null);
@@ -47,7 +47,7 @@ export default function KeystoreWallet() {
         },
         name: value.name,
         address: address,
-      } as UmKeystore;
+      } as WalletKeystore;
 
       // Set the output backup keystore.
       setOutputBackupKeystore(encryptedWithMeta);

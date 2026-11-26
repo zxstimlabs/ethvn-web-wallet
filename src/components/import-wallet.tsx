@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 // import { useAtomValue } from "jotai";
 import { useSetAtom } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 // import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Textarea } from "@/components/ui/textarea";
 import { walletsAtom } from "@/atoms/walletsAtom";
@@ -14,11 +14,11 @@ import { mnemonicToAccount } from "viem/accounts";
 import { Loader2 } from "lucide-react";
 
 export default function ImportWallet() {
-  // const wallets = useAtomValue<Array<UmKeystore>>(walletsAtom);
-  // const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  // const wallets = useAtomValue<Array<WalletKeystore>>(walletsAtom);
+  // const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
   const setWallets = useSetAtom(walletsAtom);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedKeystore, setSelectedKeystore] = useState<UmKeystore | UmKeystore[] | null>(
+  const [selectedKeystore, setSelectedKeystore] = useState<WalletKeystore | WalletKeystore[] | null>(
     null
   );
   const [pastedKeystore, setPastedKeystore] = useState<string | null>(null);
@@ -54,8 +54,8 @@ export default function ImportWallet() {
       const parsed = JSON.parse(pastedKeystore);
       // Handle both single wallet and array of wallets
       const walletsToImport = Array.isArray(parsed)
-        ? parsed as UmKeystore[]
-        : [parsed as UmKeystore];
+        ? parsed as WalletKeystore[]
+        : [parsed as WalletKeystore];
       setWallets((prevWallets) => [...prevWallets, ...walletsToImport]);
       setPastedKeystore(null);
     }
@@ -87,11 +87,11 @@ export default function ImportWallet() {
         meta: {
           type: "password-keystore-seedphrase",
           note: "the 12 words secret phrase (aka mnemonic phrase) is encrypted with the password using the keystore encryption process",
-          umVersion: "0.0.1",
+          formatVersion: "0.0.1",
         },
         name: value.name,
         address: address,
-      } as UmKeystore;
+      } as WalletKeystore;
 
       // Add the new wallet to the list of wallets in browser storage.
       setWallets((prevWallets) => [...prevWallets, encryptedWithMeta]);

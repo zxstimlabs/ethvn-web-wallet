@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAtomValue } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -27,13 +27,14 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RefreshCcw } from "lucide-react";
-import { decryptWalletToAccount } from "@/lib/um-wallet";
+import { decryptWalletToAccount } from "@/lib/wallet";
 import { recordActivity } from "@/lib/activity";
 import type { ActivityRecord } from "@/types/activity";
 import { TransactionStatus } from "@/components/transaction-status";
 import AddressBookPickerButton from "@/components/address-book-picker-button";
 import QrScannerButton from "@/components/qr-scanner-button";
 import { InformationDialog } from "@/components/information-dialog";
+import { CHAIN_ID } from "@/lib/chain";
 
 
 export default function SendNativeTokenForm() {
@@ -44,7 +45,7 @@ export default function SendNativeTokenForm() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // current active wallet
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
 
   // capture submit-time data to record on confirmation
   const pendingActivityRef = useRef<Omit<ActivityRecord, "id" | "timestamp" | "txHash"> | null>(null);
@@ -60,7 +61,7 @@ export default function SendNativeTokenForm() {
     query: {
       enabled: !!activeWallet?.address,
     },
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   // send form
@@ -103,7 +104,7 @@ export default function SendNativeTokenForm() {
           type: "native",
           from: activeWallet.address,
           to: recipientAddress,
-          chainId: 1,
+          chainId: CHAIN_ID,
           nativeValue: parseEther(value.amount).toString(),
           gasPrice: value.gasPreset ? parseEther(value.gasPreset, "gwei").toString() : undefined,
           ensName: value.receivingAddress.endsWith(".eth") ? value.receivingAddress : undefined,
@@ -114,7 +115,7 @@ export default function SendNativeTokenForm() {
           account: account,
           to: recipientAddress,
           value: parseEther(value.amount),
-          chainId: 1,
+          chainId: CHAIN_ID,
           gasPrice: value.gasPreset
             ? parseEther(value.gasPreset, "gwei")
             : undefined,
@@ -136,7 +137,7 @@ export default function SendNativeTokenForm() {
     isError: isErrorEnsAddress,
     refetch: refetchEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name: receivingAddress && receivingAddress.endsWith(".eth") && (receivingAddress.split(".")[0] !== "" || receivingAddress.split(".")[1] !== "")
       ? normalize(receivingAddress)
       : undefined,
@@ -158,7 +159,7 @@ export default function SendNativeTokenForm() {
       enabled: isBalanceQueryEnabled,
     },
     address: (activeWallet?.address as Address) || undefined,
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   // hook to send native transaction
@@ -171,7 +172,7 @@ export default function SendNativeTokenForm() {
     error: receiptError,
   } = useWaitForTransactionReceipt({
     hash: sendNativeTx.data,
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   const sendError = sendNativeTx.error?.message ?? null;

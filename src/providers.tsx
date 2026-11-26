@@ -1,5 +1,5 @@
 import * as React from "react";
-import { mainnet } from "wagmi/chains";
+import { CHAIN, CHAIN_ID, DEFAULT_RPC_URL } from "@/lib/chain";
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { createConfig, WagmiProvider, http } from "wagmi";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
@@ -15,20 +15,20 @@ function getInitialRpcUrl(): string {
     const stored = localStorage.getItem(SETTINGS_KEY);
     if (stored) {
       const settings = JSON.parse(stored) as WalletSettings;
-      if (settings.activeRpc?.chainId === mainnet.id && settings.activeRpc.url) {
+      if (settings.activeRpc?.chainId === CHAIN_ID && settings.activeRpc.url) {
         return settings.activeRpc.url;
       }
     }
   } catch {
     // ignore parse errors
   }
-  return import.meta.env.VITE_MAINNET_RPC_URL as string;
+  return DEFAULT_RPC_URL;
 }
 
 const config = createConfig({
-  chains: [mainnet],
+  chains: [CHAIN],
   transports: {
-    [mainnet.id]: http(getInitialRpcUrl()),
+    [CHAIN_ID]: http(getInitialRpcUrl()),
   },
 });
 

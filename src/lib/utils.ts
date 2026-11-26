@@ -23,5 +23,7 @@ export function chainIdToName(chainId: number) {
       return "Polygon";
     case 8453:
       return "Base";
+    case 11155111:
+      return "Sepolia";
   }
 }

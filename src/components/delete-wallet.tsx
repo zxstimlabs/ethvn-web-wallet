@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { walletsAtom } from "@/atoms/walletsAtom";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import { mnemonicToAccount } from "viem/accounts";
 
 export default function DeleteWallet() {
   const setWallets = useSetAtom(walletsAtom);
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
   const setActiveWallet = useSetAtom(activeWalletAtom);
   const [wrongPassword, setWrongPassword] = useState(false);
 

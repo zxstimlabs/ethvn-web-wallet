@@ -19,8 +19,8 @@ export default defineConfig({
         globPatterns: [],
       },
       manifest: {
-        name: "UnitMetal Web Wallet",
-        short_name: "UnitMetalW",
+        name: "Ví ETH.vn",
+        short_name: "Ví ETH.vn",
         description: "Ví web siêu nhẹ dành cho người dùng chuyên nghiệp",
         theme_color: "#000000",
         background_color: "#000000",

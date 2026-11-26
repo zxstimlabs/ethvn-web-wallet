@@ -36,7 +36,7 @@ This is a React-based Ethereum web wallet built with Vite, designed to run entir
 
 **Wallet Storage**: Wallets are encrypted client-side using `ox` library's Keystore encryption with PBKDF2 key derivation. Mnemonic phrases are encrypted with user passwords and stored in browser storage via Jotai atoms.
 
-**Chain Configuration**: Wagmi is configured with multiple EVM chains (mainnet, arbitrum, base, unichain + testnets). RPC URLs come from environment variables prefixed with `VITE_` (e.g., `VITE_MAINNET_RPC_URL`).
+**Chain Configuration**: The wallet runs on one chain, Sepolia (testnet). `src/lib/chain.ts` exports `CHAIN`, `CHAIN_ID` and `DEFAULT_RPC_URL` (`https://rpc.zxstim.com/rpc/sepolia`); components read `CHAIN_ID` instead of hard-coding a chain ID. A custom RPC picked in the settings UI (stored in localStorage) overrides the default.
 
 **Component Styling**: Components use `class-variance-authority` (CVA) for variant-based styling. The `cn()` utility combines `clsx` and `tailwind-merge`.
 

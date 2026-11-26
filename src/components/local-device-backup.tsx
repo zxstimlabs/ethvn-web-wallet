@@ -29,8 +29,8 @@ import { Loader2, Download, Eye, EyeOff } from "lucide-react";
 //   3. AES-GCM-256 decrypt(key, iv, data)
 //   4. JSON.parse the resulting plaintext
 
-interface UmWalletBackup {
-  format: "um-wallet-backup";
+interface WalletBackup {
+  format: "ethvn-wallet-backup";
   version: 1;
   createdAt: string;         // ISO 8601
   encryption: {
@@ -72,8 +72,8 @@ function ExportBackup() {
 
       const { kdfSalt, iv, data } = await encrypt(plaintext, value.password);
 
-      const backup: UmWalletBackup = {
-        format: "um-wallet-backup",
+      const backup: WalletBackup = {
+        format: "ethvn-wallet-backup",
         version: 1,
         createdAt: new Date().toISOString(),
         encryption: {
@@ -93,7 +93,7 @@ function ExportBackup() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `unitmetal-web-wallet-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `ethvn-web-wallet-backup-${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
 

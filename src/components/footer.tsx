@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
 export default function Footer() {
@@ -10,22 +9,6 @@ export default function Footer() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 border-2 border-primary">
         <div className="flex flex-col">
-          <div className="flex flex-col gap-4 border border-primary p-10">
-            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-4">
-              Theo dõi để cập nhật
-            </h2>
-            <div className="flex flex-row gap-6 items-center">
-              <Button className="w-fit rounded-none">
-                <a
-                  className="flex flex-row gap-2 items-center"
-                  href="https://x.com/unitmetalHQ"
-                  target="blank"
-                >
-                  Đến tài khoản X <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
           <div className="border border-primary p-10 grow">
             <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-6">
               Một số liên kết
@@ -77,26 +60,15 @@ export default function Footer() {
               </a>
               <a
                 className="flex flex-row gap-2 items-center dark:text-blue-400 text-blue-500 underline underline-offset-4 w-fit"
-                href="https://github.com/unitmetalhq"
+                href="https://github.com/zxstimlabs"
                 target="_blank"
               >
                 Khám phá các repository của chúng tôi <ExternalLink className="w-4 h-4" />
               </a>
             </div>
           </div>
-          <div className="grid grid-cols-3 border border-primary [&>*:not(:last-child)]:border-r *:border-primary">
-            <a target="_blank" href="https://x.com/unitmetalHQ">
-              <div className="flex py-6 items-center justify-center text-primary-foreground">
-                <img
-                  className="dark:invert"
-                  src="/x.svg"
-                  alt="X"
-                  width={28}
-                  height={28}
-                />
-              </div>
-            </a>
-            <a target="_blank" href="https://github.com/unitmetalhq">
+          <div className="grid grid-cols-2 border border-primary [&>*:not(:last-child)]:border-r *:border-primary">
+            <a target="_blank" href="https://github.com/zxstimlabs">
               <div className="flex py-6 items-center justify-center text-primary-foreground">
                 <img
                   className="dark:invert"

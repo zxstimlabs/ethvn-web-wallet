@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAtomValue } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm, useStore } from "@tanstack/react-form";
@@ -25,11 +25,12 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RefreshCcw } from "lucide-react";
-import { decryptWalletToAccount } from "@/lib/um-wallet";
+import { decryptWalletToAccount } from "@/lib/wallet";
 import { recordActivity } from "@/lib/activity";
 import type { ActivityRecord } from "@/types/activity";
 import { TransactionStatus } from "@/components/transaction-status";
 import { InformationDialog } from "@/components/information-dialog";
+import { CHAIN_ID } from "@/lib/chain";
 
 
 export default function SendErc721TokenForm() {
@@ -40,7 +41,7 @@ export default function SendErc721TokenForm() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // current active wallet
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
 
   // capture submit-time data to record on confirmation
   const pendingActivityRef = useRef<Omit<ActivityRecord, "id" | "timestamp" | "txHash"> | null>(null);
@@ -54,7 +55,7 @@ export default function SendErc721TokenForm() {
     query: {
       enabled: !!activeWallet?.address,
     },
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   // send form
@@ -100,7 +101,7 @@ export default function SendErc721TokenForm() {
           type: "erc721",
           from: activeWallet.address,
           to: recipientAddress,
-          chainId: 1,
+          chainId: CHAIN_ID,
           tokenAddress: contractAddress,
           nftId: value.tokenId,
           ensName: value.receivingAddress.endsWith(".eth") ? value.receivingAddress : undefined,
@@ -113,7 +114,7 @@ export default function SendErc721TokenForm() {
           abi: erc721Abi,
           functionName: "safeTransferFrom",
           args: [account.address, recipientAddress, BigInt(value.tokenId)],
-          chainId: 1,
+          chainId: CHAIN_ID,
         });
       }
     },
@@ -132,7 +133,7 @@ export default function SendErc721TokenForm() {
     isError: isErrorTokenEnsAddress,
     refetch: refetchTokenEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name:
       tokenAddress &&
       tokenAddress.endsWith(".eth") &&
@@ -163,7 +164,7 @@ export default function SendErc721TokenForm() {
     isError: isErrorEnsAddress,
     refetch: refetchEnsAddress,
   } = useEnsAddress({
-    chainId: 1,
+    chainId: CHAIN_ID,
     name:
       receivingAddress &&
       receivingAddress.endsWith(".eth") &&
@@ -194,20 +195,20 @@ export default function SendErc721TokenForm() {
         address: resolvedTokenAddress,
         abi: erc721Abi,
         functionName: "name",
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
       {
         address: resolvedTokenAddress,
         abi: erc721Abi,
         functionName: "symbol",
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
       {
         address: resolvedTokenAddress,
         abi: erc721Abi,
         functionName: "ownerOf",
         args: isTokenIdQueryEnabled ? [BigInt(tokenId)] : [BigInt(0)],
-        chainId: 1,
+        chainId: CHAIN_ID,
       },
     ],
     query: {
@@ -229,7 +230,7 @@ export default function SendErc721TokenForm() {
     isSuccess: isConfirmedSendErc721Transaction,
   } = useWaitForTransactionReceipt({
     hash: sendErc721TransactionHash,
-    chainId: 1,
+    chainId: CHAIN_ID,
   });
 
   const selectedChainBlockExplorer = config.chains.find(

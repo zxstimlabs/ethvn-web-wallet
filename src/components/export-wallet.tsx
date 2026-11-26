@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useAtomValue } from "jotai";
-import type { UmKeystore } from "@/types/wallet";
+import type { WalletKeystore } from "@/types/wallet";
 import { walletsAtom } from "@/atoms/walletsAtom";
 import { activeWalletAtom } from "@/atoms/activeWalletAtom";
 import { Button } from "@/components/ui/button";
@@ -13,8 +13,8 @@ import { Keystore, Bytes } from "ox";
 import CopyButton from "@/components/copy-button";
 
 export default function ExportWallet() {
-  const wallets = useAtomValue<Array<UmKeystore>>(walletsAtom);
-  const activeWallet = useAtomValue<UmKeystore | null>(activeWalletAtom);
+  const wallets = useAtomValue<Array<WalletKeystore>>(walletsAtom);
+  const activeWallet = useAtomValue<WalletKeystore | null>(activeWalletAtom);
   const [exportedSecretPhrase, setExportedSecretPhrase] = useState<
     string | null
   >(null);
@@ -27,7 +27,7 @@ export default function ExportWallet() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `unitmetal-wallets-DO_NOT_DELETE.json`;
+    a.download = `ethvn-wallets-DO_NOT_DELETE.json`;
     a.click();
   }
 

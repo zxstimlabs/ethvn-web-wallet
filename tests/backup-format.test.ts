@@ -1,5 +1,5 @@
 /**
- * Tests for the um-wallet-backup JSON format.
+ * Tests for the ethvn-wallet-backup JSON format.
  *
  * We verify the shape of the backup object and the full
  * encrypt → serialize → parse → decrypt round-trip,
@@ -8,10 +8,10 @@
 import { describe, test, expect, vi } from "vitest";
 import { encrypt, decrypt, KDF_ITERATIONS, toBase64, fromBase64 } from "@/lib/crypto";
 
-// ── Mirror of UmWalletBackup from local-device-backup.tsx ────────────────────
+// ── Mirror of WalletBackup from local-device-backup.tsx ────────────────────
 
-interface UmWalletBackup {
-  format: "um-wallet-backup";
+interface WalletBackup {
+  format: "ethvn-wallet-backup";
   version: 1;
   createdAt: string;
   email?: string;
@@ -32,10 +32,10 @@ async function buildBackup(
   plaintext: string,
   password: string,
   email?: string
-): Promise<UmWalletBackup> {
+): Promise<WalletBackup> {
   const { kdfSalt, iv, data } = await encrypt(plaintext, password);
   return {
-    format: "um-wallet-backup",
+    format: "ethvn-wallet-backup",
     version: 1,
     createdAt: new Date().toISOString(),
     ...(email ? { email } : {}),
@@ -61,10 +61,10 @@ const SAMPLE_PAYLOAD = JSON.stringify({
 
 // ── Backup object shape ───────────────────────────────────────────────────────
 
-describe("UmWalletBackup shape", () => {
-  test("format field is the literal string 'um-wallet-backup'", async () => {
+describe("WalletBackup shape", () => {
+  test("format field is the literal string 'ethvn-wallet-backup'", async () => {
     const b = await buildBackup(SAMPLE_PAYLOAD, "pass");
-    expect(b.format).toBe("um-wallet-backup");
+    expect(b.format).toBe("ethvn-wallet-backup");
   });
 
   test("version is the number 1", async () => {
@@ -168,7 +168,7 @@ describe("backup round-trip", () => {
     const password = "p4$$w0rd";
     const b = await buildBackup(SAMPLE_PAYLOAD, password);
     const serialized = JSON.stringify(b);
-    const parsed: UmWalletBackup = JSON.parse(serialized);
+    const parsed: WalletBackup = JSON.parse(serialized);
 
     const decrypted = await decrypt(
       {
@@ -239,7 +239,7 @@ describe("backup round-trip", () => {
 describe("backup format stability", () => {
   test("format identifier never changes", () => {
     // If this string changes, all existing backups are unrecognisable
-    expect("um-wallet-backup").toBe("um-wallet-backup");
+    expect("ethvn-wallet-backup").toBe("ethvn-wallet-backup");
   });
 
   test("version is a number (not a string)", async () => {
