@@ -7,40 +7,7 @@ export default function Footer() {
         <div>Chân trang</div>
         <div>_</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 border-2 border-primary">
-        <div className="flex flex-col">
-          <div className="border border-primary p-10 grow">
-            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-6">
-              Một số liên kết
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 justify-between gap-6">
-              <div className="flex flex-col gap-1">
-                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2">
-                  Đội ngũ
-                </h3>
-                <a href="/about" className="text-muted-foreground text-sm">
-                  Giới thiệu
-                </a>
-                {/* <Link href="/treasury" className="text-muted-foreground text-sm">Treasury</Link>
-                <Link href="/contributors" className="text-muted-foreground text-sm">Contributors</Link> */}
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2">
-                  Pháp lý
-                </h3>
-                <a href="/privacy" className="text-muted-foreground text-sm">
-                  Chính sách quyền riêng tư
-                </a>
-                {/* <Link href="/community-rules" className="text-muted-foreground text-sm">Community rules</Link> */}
-              </div>
-              {/* <div className="flex flex-col gap-1">
-                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2">Job board</h3>
-                <Link href="/core" className="text-muted-foreground text-sm">Core</Link>
-                <Link href="/form-a-team" className="text-muted-foreground text-sm">Form a team</Link>
-              </div> */}
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 border-2 border-primary">
         <div className="flex flex-col">
           <div className="grow border border-primary p-10">
             <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
