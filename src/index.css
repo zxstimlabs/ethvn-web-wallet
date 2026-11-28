@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+/* Be Vietnam Pro for text: drawn for Vietnamese, so stacked diacritics (ệ, ở, ữ) sit cleanly.
+   Only the weights the app uses (font-normal/medium/semibold/bold); browsers fetch a file only when it is used. */
+@import "@fontsource/be-vietnam-pro/400.css";
+@import "@fontsource/be-vietnam-pro/500.css";
+@import "@fontsource/be-vietnam-pro/600.css";
+@import "@fontsource/be-vietnam-pro/700.css";
+/* True italics for the <em> form messages (otherwise the browser slants the upright font). */
+@import "@fontsource/be-vietnam-pro/400-italic.css";
+@import "@fontsource/be-vietnam-pro/500-italic.css";
+/* JetBrains Mono for font-mono: addresses, hashes, raw JSON. */
 @import "@fontsource-variable/jetbrains-mono";
 
 @custom-variant dark (&:is(.dark *));
@@ -75,7 +85,8 @@
 }
 
 @theme inline {
-    --font-sans: 'JetBrains Mono Variable', monospace;
+    --font-sans: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
